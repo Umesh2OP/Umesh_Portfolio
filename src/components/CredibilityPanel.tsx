@@ -92,35 +92,35 @@ export const CredibilityPanel: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-8"
         >
           {METRICS_DATA.map((metric) => (
             <motion.div
               key={metric.id}
               variants={itemVariants}
               whileHover={{ y: -4, scale: 1.01 }}
-              className="p-5 rounded-2xl bg-white border border-line-strong hover:border-orange/40 transition-all duration-300 shadow-[0_8px_30px_rgba(28,26,34,0.02)] group flex flex-col justify-between select-text"
+              className="p-3.5 sm:p-5 rounded-2xl bg-white border border-line-strong hover:border-orange/40 transition-all duration-300 shadow-[0_8px_30px_rgba(28,26,34,0.02)] group flex flex-col justify-between select-text"
             >
               <div>
-                <div className="flex items-center justify-between mb-4 select-none">
-                  <div className="p-2 rounded-xl bg-cream-dim/30 border border-line transition-colors">
+                <div className="flex items-center justify-between mb-3 sm:mb-4 select-none">
+                  <div className="p-1.5 sm:p-2 rounded-xl bg-cream-dim/30 border border-line transition-colors">
                     {getIcon(metric.iconName)}
                   </div>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-purple bg-purple-soft/40 px-2 py-0.5 rounded-full border border-purple-soft/75">
+                  <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-purple bg-purple-soft/40 px-2 py-0.5 rounded-full border border-purple-soft/75 truncate max-w-[80px] sm:max-w-none">
                     {metric.badge.split(' ')[0]}
                   </span>
                 </div>
 
-                <div className="text-2xl sm:text-3xl font-bold text-ink tracking-tight group-hover:text-orange transition-colors">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-ink tracking-tight group-hover:text-orange transition-colors">
                   {metric.value}
                 </div>
 
-                <div className="text-xs font-bold text-ink mt-1.5 select-none">
+                <div className="text-[11px] sm:text-xs font-bold text-ink mt-1 select-none leading-snug">
                   {metric.label}
                 </div>
               </div>
 
-              <p className="text-[11px] text-ink-soft mt-2 leading-relaxed font-sans font-medium">
+              <p className="text-[10px] sm:text-[11px] text-ink-soft mt-2 leading-relaxed font-sans font-medium line-clamp-3 sm:line-clamp-none">
                 {metric.description}
               </p>
             </motion.div>

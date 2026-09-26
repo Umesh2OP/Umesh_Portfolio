@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ARCHITECTURE_NODES } from '../data/portfolioData';
 import { Network, Server, Database, Cpu, HardDrive, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LusionStorytelling3D } from './3d/LusionStorytelling3D';
 
 export const SystemDesignSection: React.FC = () => {
   const [selectedNodeId, setSelectedNodeId] = useState<string>('gateway-layer');
@@ -30,16 +31,19 @@ export const SystemDesignSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="max-w-3xl mb-12"
+          className="max-w-3xl mb-8"
         >
           <span className="eyebrow text-purple">Infrastructure & Design</span>
           <h2 className="text-3xl sm:text-4xl font-semibold text-ink mt-2">
             From interface to infrastructure.
           </h2>
           <p className="text-base text-ink-soft mt-3 leading-relaxed font-sans select-text font-medium">
-            An illustrative representation of how I design end-to-end full stack software systems — connecting client interactions to edge routing, rate-limiting middleware, microservice workers, and persisted databases.
+            An interactive 3D visual storytelling hub detailing how full-stack software systems are designed — connecting client interactions to edge routing, rate-limiting middleware, AI stream microservice workers, and global CDN delivery.
           </p>
         </motion.div>
+
+        {/* Interactive 3D Visual Storytelling Stage */}
+        <LusionStorytelling3D />
 
         {/* 3D Visualizer + Telemetry Inspector Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
@@ -49,7 +53,7 @@ export const SystemDesignSection: React.FC = () => {
             <div className="relative p-3.5 pb-5 bg-white border border-line-strong shadow-[0_28px_64px_rgba(31,26,18,0.08)] rounded-xl">
               <div className="absolute inset-[7px] bottom-[26px] border border-orange/45 pointer-events-none z-10" />
               
-              <div className="w-full h-[360px] lg:h-[420px] bg-[#FDFBF8] border border-line-strong overflow-hidden relative flex flex-col justify-center gap-2 px-6 py-4 bg-grid-pattern rounded">
+              <div className="w-full h-auto min-h-[360px] lg:h-[420px] bg-[#FDFBF8] border border-line-strong overflow-hidden relative flex flex-col justify-center gap-2 px-3 sm:px-6 py-4 bg-grid-pattern rounded">
                 {/* SVG Connections behind the layers */}
                 <div className="absolute inset-0 z-0 flex justify-center pointer-events-none">
                   <div className="w-0.5 h-full border-l border-dashed border-orange/30" />
@@ -63,26 +67,26 @@ export const SystemDesignSection: React.FC = () => {
                       onClick={() => setSelectedNodeId(node.id)}
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      className={`relative z-10 w-full flex items-center justify-between p-2.5 rounded-xl border transition-all pointer-events-auto text-left ${
+                      className={`relative z-10 w-full flex items-center justify-between p-2 sm:p-2.5 rounded-xl border transition-all pointer-events-auto text-left ${
                         isSelected 
                           ? 'bg-[#09090b] border-orange text-white shadow-[0_4px_20px_rgba(156,122,46,0.25)]' 
                           : 'bg-white border-line-strong text-ink hover:border-orange/60'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-1.5 rounded-lg ${isSelected ? 'bg-neutral-800' : 'bg-cream-dim/20'}`}>
+                      <div className="flex items-center gap-2.5 sm:gap-3 truncate">
+                        <div className={`p-1.5 rounded-lg shrink-0 ${isSelected ? 'bg-neutral-800' : 'bg-cream-dim/20'}`}>
                           {getNodeIcon(node.type)}
                         </div>
-                        <div>
-                          <span className={`text-[8px] font-bold uppercase tracking-wider block font-mono ${isSelected ? 'text-orange-soft' : 'text-orange'}`}>
+                        <div className="truncate">
+                          <span className={`text-[8px] font-bold uppercase tracking-wider block font-mono truncate ${isSelected ? 'text-orange-soft' : 'text-orange'}`}>
                             {node.tech.split(' · ')[0]}
                           </span>
-                          <span className="text-xs font-bold leading-tight block">
+                          <span className="text-[11px] sm:text-xs font-bold leading-tight block truncate">
                             {node.name}
                           </span>
                         </div>
                       </div>
-                      <span className={`text-[9px] font-bold font-mono px-2 py-0.5 rounded-full ${
+                      <span className={`text-[8px] sm:text-[9px] font-bold font-mono px-2 py-0.5 rounded-full shrink-0 ${
                         isSelected ? 'bg-orange text-white' : 'bg-cream-dim/35 text-ink-soft'
                       }`}>
                         {node.latency}
@@ -92,7 +96,7 @@ export const SystemDesignSection: React.FC = () => {
                 })}
               </div>
 
-              <div className="mt-2.5 flex items-center justify-between font-sans text-[9px] font-semibold tracking-wider text-ink-soft select-none">
+              <div className="mt-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 font-sans text-[8px] sm:text-[9px] font-semibold tracking-wider text-ink-soft select-none">
                 <span>PLATE 02. INTERACTIVE PIPELINE BLUEPRINT</span>
                 <span>SELECT ANY LAYER TO INSPECT TELEMETRY</span>
               </div>
@@ -101,7 +105,7 @@ export const SystemDesignSection: React.FC = () => {
 
           {/* Right Column: Node Inspector Panel */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-line-strong bg-white p-6 lg:p-8 shadow-sm">
+            <div className="rounded-2xl border border-line-strong bg-white p-5 sm:p-6 lg:p-8 shadow-sm">
               
               <div className="flex items-center justify-between pb-4 border-b border-line font-sans text-xs text-ink-soft select-none">
                 <span className="text-purple font-bold flex items-center gap-1.5">
@@ -169,11 +173,11 @@ export const SystemDesignSection: React.FC = () => {
         </div>
 
         {/* 2D Interactive Layer Switcher Bar */}
-        <div className="p-5 rounded-2xl bg-white border border-line-strong font-sans">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-line-strong font-sans">
           <span className="text-[10px] font-bold text-ink-soft block mb-3 uppercase tracking-wider select-none">
             [Quick Layer Selector]
           </span>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
             {ARCHITECTURE_NODES.map((node) => {
               const isSelected = selectedNodeId === node.id;
               return (

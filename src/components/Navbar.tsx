@@ -37,7 +37,9 @@ export const Navbar: React.FC = () => {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section);
+            if (activeSection !== section) {
+              setActiveSection(section);
+            }
             break;
           }
         }
@@ -46,7 +48,7 @@ export const Navbar: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeSection]);
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -67,17 +69,17 @@ export const Navbar: React.FC = () => {
       <div className="hidden lg:flex fixed top-0 left-0 w-full items-start z-50 pointer-events-none select-none">
         
         {/* Left Side Thin Bar */}
-        <div className="h-8 bg-[#09090b] flex-grow flex items-center px-6 border-b border-white/[0.08] pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange animate-pulse" />
-            <span className="text-[9px] font-extrabold tracking-[0.25em] font-mono text-neutral-300 uppercase">
+        <div className="h-9 bg-[#09090b] flex-grow flex items-center justify-between px-4 xl:px-6 border-b border-white/[0.08] pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.15)] min-w-0">
+          <div className="flex items-center gap-2 truncate">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange animate-pulse shrink-0" />
+            <span className="text-[9px] font-extrabold tracking-[0.2em] xl:tracking-[0.25em] font-mono text-neutral-300 uppercase truncate">
               {PERSONAL_INFO.name} OS
             </span>
           </div>
         </div>
 
         {/* Left Concave S-Curve */}
-        <div className="w-6 h-14 text-[#09090b] fill-current pointer-events-none relative -mt-[0.5px] z-10">
+        <div className="w-5 xl:w-6 h-14 text-[#09090b] fill-current pointer-events-none relative -mt-[0.5px] z-10 shrink-0">
           <svg className="w-full h-full" viewBox="0 0 24 56" preserveAspectRatio="none">
             <path d="M0 32c12 0 12 24 24 24V0H0z" />
             <path d="M0 32c12 0 12 24 24 24" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.2" />
@@ -85,18 +87,19 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Center Notch Body */}
-        <div className="w-[660px] h-14 bg-[#09090b] flex items-center justify-center px-8 border-b border-white/[0.08] pointer-events-auto relative z-20 shadow-[0_4px_30px_rgba(0,0,0,0.25)]">
+        <div className="w-[580px] xl:w-[660px] h-14 bg-[#09090b] flex items-center justify-center px-4 xl:px-8 border-b border-white/[0.08] pointer-events-auto relative z-20 shadow-[0_4px_30px_rgba(0,0,0,0.25)] shrink-0">
           <div className="flex items-center justify-between w-full h-full pt-1.5">
             
             {/* Left Nav Menu */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 xl:gap-2">
               {leftLinks.map((link) => {
                 const isActive = activeSection === link.href.replace('#', '');
                 return (
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-widest transition-colors duration-200 ${
+                    data-magnetic="true"
+                    className={`relative px-2.5 xl:px-3 py-1.5 text-[8px] xl:text-[9px] font-extrabold uppercase tracking-wider xl:tracking-widest transition-colors duration-200 ${
                       isActive ? 'text-white' : 'text-neutral-400 hover:text-white'
                     }`}
                   >
@@ -114,21 +117,22 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Central Brand Star Icon */}
-            <div className="flex items-center justify-center px-2">
-              <svg className="w-4 h-4 text-orange fill-current animate-pulse" viewBox="0 0 24 24">
+            <div className="flex items-center justify-center px-1 xl:px-2 shrink-0">
+              <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-orange fill-current animate-pulse" viewBox="0 0 24 24">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
               </svg>
             </div>
 
             {/* Right Nav Menu */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 xl:gap-2">
               {rightLinks.map((link) => {
                 const isActive = activeSection === link.href.replace('#', '');
                 return (
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-widest transition-colors duration-200 ${
+                    data-magnetic="true"
+                    className={`relative px-2.5 xl:px-3 py-1.5 text-[8px] xl:text-[9px] font-extrabold uppercase tracking-wider xl:tracking-widest transition-colors duration-200 ${
                       isActive ? 'text-white' : 'text-neutral-400 hover:text-white'
                     }`}
                   >
@@ -149,7 +153,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Right Concave S-Curve */}
-        <div className="w-6 h-14 text-[#09090b] fill-current pointer-events-none relative -mt-[0.5px] z-10">
+        <div className="w-5 xl:w-6 h-14 text-[#09090b] fill-current pointer-events-none relative -mt-[0.5px] z-10 shrink-0">
           <svg className="w-full h-full" viewBox="0 0 24 56" preserveAspectRatio="none">
             <path d="M0 56c12 0 12-24 24-24V0H0z" />
             <path d="M0 56c12 0 12-24 24-24" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.2" />
@@ -157,14 +161,14 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Right Side Thin Bar */}
-        <div className="h-8 bg-[#09090b] flex-grow flex items-center justify-end px-6 border-b border-white/[0.08] pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
-          <div className="flex items-center gap-4 text-neutral-400 text-[10px] font-mono">
-            <Wifi className="w-3.5 h-3.5 hover:text-white transition-colors cursor-pointer" />
+        <div className="h-9 bg-[#09090b] flex-grow flex items-center justify-end px-4 xl:px-6 border-b border-white/[0.08] pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.15)] min-w-0">
+          <div className="flex items-center gap-3 xl:gap-4 text-neutral-400 text-[10px] font-mono shrink-0">
+            <Wifi className="w-3.5 h-3.5 hover:text-white transition-colors cursor-pointer hidden sm:block" />
             <div className="flex items-center gap-1">
               <Battery className="w-4 h-4 text-orange hover:text-white transition-colors cursor-pointer" />
               <span className="text-[8px] font-bold text-neutral-500">100%</span>
             </div>
-            <span className="text-neutral-300 font-bold uppercase tracking-wider">{timeString}</span>
+            <span className="text-neutral-300 font-bold uppercase tracking-wider text-[9px] xl:text-[10px]">{timeString}</span>
           </div>
         </div>
 
@@ -177,7 +181,7 @@ export const Navbar: React.FC = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 100, damping: 15, delay: 0.15 }}
           layout
-          className="relative w-[92%] bg-[#09090b] text-neutral-200 border border-neutral-800/80 rounded-[24px] shadow-[0_12px_40px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto"
+          className="relative w-[94%] max-w-md bg-[#09090b] text-neutral-200 border border-neutral-800/80 rounded-[24px] shadow-[0_12px_40px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto"
         >
           {/* Simulated iPhone Camera & Sensor Array */}
           <div className="absolute top-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/80 border border-white/5 pointer-events-none select-none z-30">
@@ -189,21 +193,23 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Inner Header Area */}
-          <div className="px-5 pt-5 pb-3 flex items-center justify-between h-14">
+          <div className="px-4 sm:px-5 pt-5 pb-3 flex items-center justify-between h-14">
             {/* Brand/Logo */}
-            <a href="#home" className="font-bold text-white text-[11px] tracking-widest uppercase flex items-center gap-2 select-none z-20">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange animate-pulse" />
-              <span>{PERSONAL_INFO.name}</span>
+            <a href="#home" className="font-bold text-white text-[10px] sm:text-[11px] tracking-widest uppercase flex items-center gap-2 select-none z-20 truncate">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange animate-pulse shrink-0" />
+              <span className="truncate">{PERSONAL_INFO.name}</span>
             </a>
 
-            {/* Mobile Toggle Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 rounded-full border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 transition-colors z-20"
-              aria-label="Toggle Navigation Menu"
-            >
-              {mobileMenuOpen ? <X className="w-3.5 h-3.5" /> : <Menu className="w-3.5 h-3.5" />}
-            </button>
+            {/* Mobile Menu Toggle Button */}
+            <div className="flex items-center gap-2 z-20 shrink-0">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-full border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 transition-colors"
+                aria-label="Toggle Navigation Menu"
+              >
+                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Drawer (Dynamic Island morphing expansion) */}
@@ -214,7 +220,7 @@ export const Navbar: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="border-t border-neutral-900 bg-[#09090b] px-6 py-5 space-y-1.5 z-20 max-h-[calc(100vh-80px)] overflow-y-auto"
+                className="border-t border-neutral-900 bg-[#09090b] px-5 py-4 space-y-1 z-20 max-h-[calc(100vh-90px)] overflow-y-auto"
               >
                 {navLinks.map((link) => {
                   const isActive = activeSection === link.href.replace('#', '');
@@ -223,7 +229,7 @@ export const Navbar: React.FC = () => {
                       key={link.name}
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`block px-4 py-2 text-[10px] font-extrabold uppercase tracking-widest rounded-xl transition-colors ${
+                      className={`block px-4 py-2.5 text-[10px] font-extrabold uppercase tracking-widest rounded-xl transition-colors ${
                         isActive ? 'text-white bg-white/10' : 'text-neutral-400 hover:text-white hover:bg-white/5'
                       }`}
                     >
@@ -234,7 +240,7 @@ export const Navbar: React.FC = () => {
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-center mt-3 bg-orange hover:bg-orange/95 text-white font-extrabold uppercase tracking-widest py-2.5 rounded-xl text-[9px]"
+                  className="block w-full text-center mt-3 bg-orange hover:bg-orange/95 text-white font-extrabold uppercase tracking-widest py-3 rounded-xl text-[10px]"
                 >
                   Start Project →
                 </a>
@@ -247,4 +253,6 @@ export const Navbar: React.FC = () => {
     </>
   );
 };
+
+
 

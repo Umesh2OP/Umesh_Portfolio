@@ -19,6 +19,7 @@ export interface ProjectItem {
   metricsResult?: string;
   githubUrl?: string;
   liveUrl?: string;
+  videoUrl?: string;
   architectureDiagramType: 'rate-limiter' | 'ai-pipeline' | 'vite-agency' | 'performance-opt';
 }
 

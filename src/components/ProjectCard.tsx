@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ProjectItem } from '../types/portfolio';
 import { ArrowUpRight, Terminal, CheckCircle2, Zap } from 'lucide-react';
 
@@ -9,9 +9,38 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const [activeTab, setActiveTab] = useState<'highlights' | 'architecture'>('highlights');
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotX = (y / (rect.height / 2)) * -6; // max 6 deg tilt
+    const rotY = (x / (rect.width / 2)) * 6;
+
+    setRotate({ x: rotX, y: rotY });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 });
+  };
 
   return (
-    <div className="rounded-2xl border border-line-strong bg-white overflow-hidden shadow-sm transition-all duration-300 hover:border-orange/30">
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      data-cursor-text="VIEW"
+      data-magnetic="true"
+      style={{
+        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+        transition: 'transform 0.15s ease-out',
+      }}
+      className="rounded-2xl border border-line-strong bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:border-orange/40"
+    >
       
       {/* Top Card Header Bar */}
       <div className="bg-cream-dim/20 px-6 py-4 border-b border-line flex flex-wrap items-center justify-between gap-3">
@@ -286,3 +315,4 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     </div>
   );
 };
+

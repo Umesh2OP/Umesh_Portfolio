@@ -241,30 +241,30 @@ export const HeroSystemDashboard: React.FC<{ isMobile?: boolean }> = ({ isMobile
         </div>
 
         {/* Bottom Detailed Description Text Overlay inside Frame */}
-        <div className="absolute bottom-[38px] left-2 right-2 px-3 py-1 bg-white/90 border border-line-strong rounded z-20 font-mono text-[7.5px] text-neutral-500 transition-all duration-200">
+        <div className="absolute bottom-[40px] left-2 right-2 px-2.5 sm:px-3 py-1 bg-white/90 border border-line-strong rounded z-20 font-mono text-[7px] sm:text-[7.5px] text-neutral-500 transition-all duration-200 truncate">
           <span className="text-orange font-bold uppercase mr-1 select-none">DETAILS:</span>
           <span>{activeTelemetry.details}</span>
         </div>
 
         {/* Bottom Technical Stats Overlay inside Frame */}
-        <div className="absolute bottom-2 left-2 right-2 px-3 py-1.5 bg-white/95 backdrop-blur-sm border border-line-strong rounded z-20 flex justify-between items-center font-mono text-[8px] sm:text-[9px] text-ink shadow-sm">
-          <div className="flex gap-4">
+        <div className="absolute bottom-1.5 sm:bottom-2 left-2 right-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/95 backdrop-blur-sm border border-line-strong rounded z-20 flex justify-between items-center font-mono text-[7.5px] sm:text-[9px] text-ink shadow-sm overflow-hidden">
+          <div className="flex gap-2 sm:gap-4 truncate">
             <div>
-              <span className="text-ink-soft block text-[7px] uppercase tracking-wider font-semibold">REQUESTS</span>
+              <span className="text-ink-soft block text-[6.5px] sm:text-[7px] uppercase tracking-wider font-semibold">REQUESTS</span>
               <span className="font-bold">{activeTelemetry.requests}</span>
             </div>
             <div>
-              <span className="text-ink-soft block text-[7px] uppercase tracking-wider font-semibold">LATENCY</span>
+              <span className="text-ink-soft block text-[6.5px] sm:text-[7px] uppercase tracking-wider font-semibold">LATENCY</span>
               <span className="font-bold text-green-600">{activeTelemetry.latency}</span>
             </div>
             <div>
-              <span className="text-ink-soft block text-[7px] uppercase tracking-wider font-semibold">STATUS</span>
+              <span className="text-ink-soft block text-[6.5px] sm:text-[7px] uppercase tracking-wider font-semibold">STATUS</span>
               <span className="font-bold text-green-600">{activeTelemetry.status}</span>
             </div>
           </div>
-          <div className="text-right border-l border-line-strong pl-3">
-            <span className="text-ink-soft block text-[7px] uppercase tracking-wider font-semibold">MODE</span>
-            <span className="font-bold uppercase text-orange">{activeTelemetry.mode}</span>
+          <div className="text-right border-l border-line-strong pl-2 sm:pl-3 shrink-0">
+            <span className="text-ink-soft block text-[6.5px] sm:text-[7px] uppercase tracking-wider font-semibold">MODE</span>
+            <span className="font-bold uppercase text-orange text-[7.5px] sm:text-[9px]">{activeTelemetry.mode}</span>
           </div>
         </div>
 

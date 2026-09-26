@@ -21,6 +21,11 @@
   --radius-sm: 16px;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body {
   margin: 0;
   padding: 0;

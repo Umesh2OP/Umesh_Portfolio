@@ -18,23 +18,50 @@ export const AboutSection: React.FC = () => {
             transition={{ duration: 0.4 }}
             className="lg:col-span-7 space-y-6"
           >
-            <span className="eyebrow text-purple">Engineering Perspective</span>
+            <span className="eyebrow text-purple">Engineering Mindset & Evolution</span>
 
             <h2 className="text-3xl sm:text-4xl font-semibold text-ink mt-2">
-              Behind the UI, systems drive outcomes.
+              Behind the interface, software is an engineering discipline.
             </h2>
+
+            {/* Developer -> Builder -> Problem Solver -> Product Engineer Milestone Stepper */}
+            <div className="py-2 border-y border-line my-4 grid grid-cols-2 sm:grid-cols-4 gap-3 select-none">
+              <div className="p-3 rounded-xl bg-cream-dim/20 border border-line">
+                <span className="text-[9px] font-mono font-bold text-orange uppercase block">01 · Origin</span>
+                <span className="text-xs font-bold text-ink block mt-0.5">Developer</span>
+                <span className="text-[10px] text-ink-soft block font-mono mt-0.5">UI Craft & React</span>
+              </div>
+
+              <div className="p-3 rounded-xl bg-cream-dim/20 border border-line">
+                <span className="text-[9px] font-mono font-bold text-orange uppercase block">02 · Expansion</span>
+                <span className="text-xs font-bold text-ink block mt-0.5">Builder</span>
+                <span className="text-[10px] text-ink-soft block font-mono mt-0.5">MERN & APIs</span>
+              </div>
+
+              <div className="p-3 rounded-xl bg-cream-dim/20 border border-line">
+                <span className="text-[9px] font-mono font-bold text-orange uppercase block">03 · Optimization</span>
+                <span className="text-xs font-bold text-ink block mt-0.5">Problem Solver</span>
+                <span className="text-[10px] text-ink-soft block font-mono mt-0.5">Latency & TTL</span>
+              </div>
+
+              <div className="p-3 rounded-xl bg-ink text-cream border border-orange">
+                <span className="text-[9px] font-mono font-bold text-orange uppercase block">04 · Focus</span>
+                <span className="text-xs font-bold text-white block mt-0.5">Product Engineer</span>
+                <span className="text-[10px] text-neutral-300 block font-mono mt-0.5">End-to-End Systems</span>
+              </div>
+            </div>
 
             <div className="space-y-4 text-base text-ink-soft leading-relaxed font-sans select-text font-medium">
               <p>
-                My journey began with crafting intuitive frontend user interfaces using React and modern CSS. However, as I built more complex web applications, my focus naturally expanded to what happens behind the screen — API payload design, database query indexing, memory caching with Redis, and JWT authentication flows.
+                My engineering journey began with crafting responsive frontend interfaces using React, TypeScript, and modern CSS architecture. As I engineered production web applications, my focus naturally expanded beyond UI components to system infrastructure — REST API contract design, Redis in-memory caching, JWT security flows, and database query optimization.
               </p>
 
               <p>
-                I view software development as an integrated discipline. A responsive interface is only as effective as the latency of its endpoints, the reliability of its state management, and the scalability of its infrastructure.
+                A responsive interface is only as effective as the latency of its backend endpoints, the reliability of its client state management, and the performance of its build architecture.
               </p>
 
               <p className="text-ink font-semibold">
-                Today, I focus on engineering full-stack software that solves tangible business and technical challenges — whether optimizing load times for thousands of users or building low-overhead rate limiting infrastructure.
+                Today, I focus on building production-grade software that solves real business challenges — whether reducing cold-start load times by 96% for thousands of users or architecting low-overhead rate limiting microservices.
               </p>
             </div>
 

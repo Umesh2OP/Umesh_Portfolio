@@ -1,6 +1,7 @@
 import React from 'react';
 import { HeroSystemDashboard } from './HeroSystemDashboard';
 import { motion } from 'framer-motion';
+import { LusionTextSkew } from './ui/LusionTextSkew';
 
 export const HeroSection: React.FC = () => {
   const containerVariants = {
@@ -55,14 +56,15 @@ export const HeroSection: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Main Headline */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink tracking-tight leading-[1.05] font-sans"
-            >
-              I build software<br />
-              that works <span className="accent">beyond the interface.</span>
-            </motion.h1>
+            {/* Main Headline with Lusion Kinetic Skew */}
+            <motion.div variants={itemVariants}>
+              <LusionTextSkew
+                as="h1"
+                text="I build software that works beyond the interface."
+                accentWords={['beyond', 'interface.']}
+                className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink tracking-tight leading-[1.05] font-sans"
+              />
+            </motion.div>
 
             {/* Category Chips / Metadata */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-2 pt-0.5">
@@ -83,7 +85,7 @@ export const HeroSection: React.FC = () => {
             </motion.p>
 
             {/* Action Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-1">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
               <motion.a
                 href="#work"
                 whileHover={{ scale: 1.02 }}
@@ -121,7 +123,7 @@ export const HeroSection: React.FC = () => {
               <span className="text-[9px] font-extrabold text-ink-soft/75 uppercase tracking-widest block sm:w-24 shrink-0">
                 CORE STACK
               </span>
-              <span className="text-xs font-bold font-mono text-ink-soft leading-none">
+              <span className="text-xs font-bold font-mono text-ink-soft leading-snug sm:leading-none">
                 React · Next.js · Node.js · PostgreSQL · Redis
               </span>
             </motion.div>
@@ -129,15 +131,17 @@ export const HeroSection: React.FC = () => {
             {/* Availability Status Bar */}
             <motion.div
               variants={itemVariants}
-              className="pt-4 border-t border-line/40 flex items-center gap-2.5 text-[9px] text-ink-soft font-mono select-text"
+              className="pt-4 border-t border-line/40 flex flex-wrap items-center gap-2 sm:gap-2.5 text-[8px] sm:text-[9px] text-ink-soft font-mono select-text"
             >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green"></span>
-              </span>
-              <span className="font-bold text-green uppercase tracking-wider">OPEN FOR PROJECTS</span>
-              <span className="text-ink-soft/30">|</span>
-              <span className="uppercase tracking-wider font-bold">IST (UTC+5:30) · GLOBAL CLIENTS · ~24H RESPONSE</span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green"></span>
+                </span>
+                <span className="font-bold text-green uppercase tracking-wider">OPEN FOR PROJECTS</span>
+              </div>
+              <span className="text-ink-soft/30 hidden sm:inline">|</span>
+              <span className="uppercase tracking-wider font-bold text-[8px] sm:text-[9px]">IST (UTC+5:30) · GLOBAL CLIENTS · ~24H RESPONSE</span>
             </motion.div>
 
           </motion.div>

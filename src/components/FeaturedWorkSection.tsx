@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PROJECTS_DATA } from '../data/portfolioData';
-import { ProjectCard } from './ProjectCard';
-import { X, ArrowUpRight, Zap, Code2, CheckCircle2 } from 'lucide-react';
 import { ProjectItem } from '../types/portfolio';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Project3DVideoModal } from './3d/Project3DVideoModal';
+import { ZoomClickModal, ZoomItemData } from './ui/ZoomClickModal';
+import { LusionTextSkew } from './ui/LusionTextSkew';
+import { ArrowUpRight, Play, ZoomIn } from 'lucide-react';
 
 // Mockup Images
 import quotaguardImg from '../assets/quotaguard.png';
@@ -22,196 +24,171 @@ const projectImages: Record<string, string> = {
   luxuryjewels: luxuryjewelsImg,
 };
 
+// Project bullet tags matching Lusion style (CONCEPT · WEB · DESIGN · DEVELOPMENT · 3D · ANIMATION)
+const projectBulletTags: Record<string, string> = {
+  'realestate-opt': 'SYSTEM PERFORMANCE · CORE WEB VITALS · SERVER TUNING · CACHE WARMUP',
+  quotaguard: 'INFRASTRUCTURE · API SECURITY · REDIS · JWT · DASHBOARD',
+  blogverse: 'AI PLATFORM · FASTAPI · GROQ LLM · REDUX · STREAMING',
+  gavenue: 'AGENCY PLATFORM · VITE · FRAMER MOTION · VERCEL EDGE',
+  slotswapper: 'P2P CALENDAR · SCHEDULING ENGINE · MONGODB · REACT',
+  luxuryjewels: 'LUXURY SHOWROOM · E-COMMERCE · BAZAR · VITE · REACT',
+};
+
 export const FeaturedWorkSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [zoomItem, setZoomItem] = useState<ZoomItemData | null>(null);
 
-  // Disable body scroll when modal is active
-  useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedProject]);
-
-  // Triple projects data to guarantee infinite scroll seamless loop without gaps
-  const marqueeProjects = [...PROJECTS_DATA, ...PROJECTS_DATA, ...PROJECTS_DATA];
+  const handleOpenZoom = (project: ProjectItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setZoomItem({
+      id: project.id,
+      title: project.title,
+      category: project.category,
+      description: `${project.subtitle} — ${project.solution}`,
+      image: projectImages[project.id],
+      videoUrl: project.videoUrl,
+      demoUrl: project.liveUrl,
+      githubUrl: project.githubUrl,
+      techStack: project.technologies,
+      metrics: project.metricsResult
+        ? [{ label: 'Metric Impact', value: project.metricsResult }]
+        : undefined,
+    });
+  };
 
   return (
-    <section id="work" className="py-20 bg-cream relative overflow-hidden">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="work" className="py-20 sm:py-28 bg-cream relative overflow-hidden select-none">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 select-none">
+        {/* Lusion Signature Header Layout */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-16 gap-8">
+          
+          {/* Left Column: Giant Headline */}
           <div>
-            <span className="eyebrow text-purple">Case Studies</span>
-            <h2 className="text-3xl sm:text-4xl font-semibold text-ink mt-2">
-              Systems & Production Applications
-            </h2>
+            <span className="eyebrow text-purple mb-2 block">SELECTED CASE STUDIES</span>
+            <LusionTextSkew
+              as="h2"
+              text="Featured Work"
+              accentWords={['Work']}
+              className="text-5xl sm:text-6xl md:text-7xl font-normal text-ink tracking-tight font-sans leading-[0.95]"
+            />
+          </div>
 
-            <p className="text-base text-ink-soft mt-3 max-w-2xl font-sans">
-              A continuous flow of case studies. Hover to pause the stream, and click any card to inspect system solution blueprints, codebase metrics, and live repo links.
+          {/* Right Column: Lusion Header Metadata & CTAs */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6 lg:max-w-md">
+            <p className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.18em] text-ink-soft leading-relaxed font-sans">
+              CLICK ANY CARD FOR 3D CINEMATIC ZOOM-IN FOCUS & LIVE SPECIFICATIONS.
             </p>
+
+            <div className="flex items-center gap-3 shrink-0">
+              <a
+                href="#contact"
+                data-magnetic="true"
+                className="px-4 py-2 rounded-full bg-ink text-cream text-[10px] font-extrabold uppercase tracking-widest hover:bg-orange transition-colors flex items-center gap-1.5 shadow-md"
+              >
+                <span>LET'S TALK</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-orange" />
+              </a>
+            </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-line-strong rounded-full text-xs font-semibold text-ink-soft shrink-0 select-none shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-orange"></span>
-            </span>
-            <span>Live System Feed</span>
-          </div>
         </div>
 
-      </div>
-
-      {/* Infinite Horizontal Marquee Container */}
-      <div className="relative w-full overflow-hidden py-4 border-y border-line-strong bg-cream-dim/10">
-        <div className="animate-marquee gap-6 flex">
-          {marqueeProjects.map((project, index) => {
-            // Distinct accent colors for each project id
-            let accentColorClass = 'border-t-orange';
-            let bgSoftClass = 'bg-orange-soft/40';
-            let textAccentClass = 'text-orange';
-
-            if (project.id === 'realestate-opt') {
-              accentColorClass = 'border-t-green-500';
-              bgSoftClass = 'bg-green-100';
-              textAccentClass = 'text-green-600';
-            } else if (project.id === 'blogverse') {
-              accentColorClass = 'border-t-purple';
-              bgSoftClass = 'bg-purple-soft/40';
-              textAccentClass = 'text-purple';
-            } else if (project.id === 'gavenue') {
-              accentColorClass = 'border-t-green';
-              bgSoftClass = 'bg-green-soft/40';
-              textAccentClass = 'text-green';
-            } else if (project.id === 'slotswapper') {
-              accentColorClass = 'border-t-amber-500';
-              bgSoftClass = 'bg-amber-100';
-              textAccentClass = 'text-amber-600';
-            }
+        {/* Lusion 2-Column Responsive Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-14">
+          {PROJECTS_DATA.map((project, idx) => {
+            const bulletTag =
+              projectBulletTags[project.id] ||
+              'CONCEPT · WEB · DESIGN · DEVELOPMENT · 3D · ANIMATION';
 
             return (
-              <div
-                key={`${project.id}-${index}`}
-                onClick={() => setSelectedProject(project)}
-                className="w-[300px] sm:w-[350px] shrink-0 bg-[#09090b] text-neutral-200 border border-white/[0.08] rounded-[28px] overflow-hidden hover:border-orange/60 hover:shadow-2xl transition-all duration-300 cursor-pointer group shadow-lg flex flex-col"
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                onClick={(e) => handleOpenZoom(project, e)}
+                className="group cursor-pointer flex flex-col"
               >
-                {/* Top Image Container with bottom fade gradient */}
-                <div className="relative h-[180px] w-full overflow-hidden">
-                  <img
-                    src={projectImages[project.id]}
-                    alt={project.title}
-                    className="w-full h-full object-cover filter grayscale contrast-[1.15] brightness-90 group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/40 to-transparent" />
-                </div>
+                {/* Rounded Media Card Frame with Video Texture */}
+                <div
+                  data-cursor-text="ZOOM"
+                  data-magnetic="true"
+                  className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full rounded-[24px] sm:rounded-[32px] overflow-hidden bg-neutral-900 border border-line-strong shadow-sm group-hover:shadow-2xl transition-all duration-300 transform-gpu"
+                >
+                  {project.videoUrl ? (
+                    <video
+                      src={project.videoUrl}
+                      poster={projectImages[project.id]}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover filter contrast-[1.05] brightness-[0.96] group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                  ) : (
+                    <img
+                      src={projectImages[project.id]}
+                      alt={project.title}
+                      className="w-full h-full object-cover filter contrast-[1.05] brightness-[0.96] group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                  )}
 
-                {/* Card Body */}
-                <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
-                  <div className="space-y-3">
-                    {/* Header: Title & Checkmark */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <h3 className="text-base font-bold text-white tracking-tight truncate group-hover:text-orange transition-colors duration-200">
-                          {project.title}
-                        </h3>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0" />
-                      </div>
-                      <span className="text-[8px] font-bold text-orange-soft/80 border border-orange-soft/20 px-2 py-0.5 rounded-full uppercase tracking-widest shrink-0">
-                        {project.category.split(' ')[0]}
-                      </span>
-                    </div>
-
-                    {/* Subtitle / Description */}
-                    <div className="space-y-1">
-                      <p className="text-[10px] font-bold text-orange uppercase tracking-wider">
-                        {project.subtitle}
-                      </p>
-                      <p className="text-[11px] text-neutral-400 leading-relaxed font-medium line-clamp-3">
-                        {project.problem}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Footer stats and white pill action button */}
-                  <div className="pt-4 border-t border-neutral-900 flex items-center justify-between">
-                    
-                    {/* Stats Icons */}
-                    <div className="flex items-center gap-3 text-neutral-400 font-mono text-[9px]">
-                      <div className="flex items-center gap-1" title="Technologies count">
-                        <Code2 className="w-3.5 h-3.5 text-neutral-500" />
-                        <span className="font-bold">{project.technologies.length}</span>
-                      </div>
-                      {project.metricsResult && (
-                        <div className="flex items-center gap-1" title={project.metricsResult}>
-                          <Zap className="w-3.5 h-3.5 text-orange/80 animate-pulse" />
-                          <span className="font-bold truncate max-w-[80px] sm:max-w-[100px]">
-                            {project.id === 'realestate-opt' ? 'LCP 1.1s' : project.id === 'quotaguard' ? '< 5ms' : project.id === 'blogverse' ? '~30%' : project.id === 'gavenue' ? '48h' : project.id === 'luxuryjewels' ? 'Cayman' : '0 overlap'}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* White Pill Button */}
-                    <button className="bg-white hover:bg-neutral-200 text-neutral-950 font-extrabold px-4 py-1.5 rounded-full text-[9px] uppercase tracking-widest transition-colors flex items-center gap-1 shrink-0">
-                      <span>Inspect</span>
-                      <ArrowUpRight className="w-3 h-3 stroke-[2.5]" />
+                  {/* Gradient Overlay & Hover Badge */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300 pointer-events-none" />
+                  
+                  <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 z-20 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <span className="px-3.5 py-1.5 rounded-full bg-orange text-white text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1.5 shadow-lg">
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      <span>3D Zoom Focus</span>
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedProject(project);
+                      }}
+                      className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-wider hover:bg-black pointer-events-auto"
+                    >
+                      3D Shader Mode
                     </button>
+                  </div>
 
+                  <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 p-2 rounded-full bg-cream/20 backdrop-blur-md text-white group-hover:bg-orange transition-colors pointer-events-none">
+                    <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
-              </div>
+
+                {/* Sub-label Category Bullets */}
+                <div className="mt-4 sm:mt-5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.16em] text-ink-soft/80 font-mono">
+                  {bulletTag}
+                </div>
+
+                {/* Minimalist Large Title */}
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-ink tracking-tight font-sans mt-1.5 group-hover:text-orange transition-colors duration-300">
+                  {project.title}
+                </h3>
+              </motion.div>
             );
           })}
         </div>
+
       </div>
 
-      {/* Case Study Full-Screen Overlay Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm select-text"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 15, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 15, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 280, damping: 26 }}
-              onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              className="bg-cream rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-line-strong shadow-2xl relative"
-            >
-              
-              {/* Modal Exit Button */}
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-white border border-line-strong text-ink hover:text-orange hover:border-orange transition-all duration-200 shadow-sm"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
+      {/* 3D WebGL Video Canvas Modal */}
+      <Project3DVideoModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
 
-              {/* Injected Detailed Case Study Component */}
-              <div className="p-2 sm:p-4 select-text">
-                <ProjectCard
-                  project={selectedProject}
-                  index={PROJECTS_DATA.findIndex((p) => p.id === selectedProject.id)}
-                />
-              </div>
-
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+      {/* 3D Cinematic Zoom-In / Zoom-Out Click Modal */}
+      <ZoomClickModal
+        isOpen={zoomItem !== null}
+        onClose={() => setZoomItem(null)}
+        data={zoomItem}
+      />
     </section>
   );
 };
+
+export default FeaturedWorkSection;

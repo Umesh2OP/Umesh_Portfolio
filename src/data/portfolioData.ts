@@ -72,6 +72,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     metricsResult: "LCP: 30.6s ➔ 1.1s (96% Faster)",
     githubUrl: "",
     liveUrl: "",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-code-running-on-a-computer-screen-41551-large.mp4",
     architectureDiagramType: "performance-opt"
   },
   {
@@ -91,6 +92,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     metricsResult: "< 5ms Rate-Limiter Overhead",
     githubUrl: "https://github.com/Umesh2OP/rate-limiter-api",
     liveUrl: "https://github.com/Umesh2OP/rate-limiter-api-Frontend",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-41328-large.mp4",
     architectureDiagramType: "rate-limiter"
   },
   {
@@ -109,6 +111,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     ],
     metricsResult: "~30% Reduction in Redundant API Requests",
     githubUrl: "https://github.com/Umesh2OP/Ai-Blogsite",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-41334-large.mp4",
     architectureDiagramType: "ai-pipeline"
   },
   {
@@ -126,6 +129,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     ],
     metricsResult: "Shipped to Production in 48 Hours",
     githubUrl: "https://github.com/Umesh2OP/gavenue-redesign-",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-person-working-on-a-laptop-in-a-modern-office-41331-large.mp4",
     architectureDiagramType: "vite-agency"
   },
   {
@@ -144,6 +148,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     metricsResult: "Zero Scheduling Overlaps",
     githubUrl: "https://github.com/Umesh2OP/SlotSwapper-Backend.",
     liveUrl: "https://github.com/Umesh2OP/SlotSwapper-Frontend",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-working-on-a-code-in-a-computer-41549-large.mp4",
     architectureDiagramType: "vite-agency"
   },
   {
@@ -163,6 +168,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     metricsResult: "Cayman Islands Client Launch",
     githubUrl: "",
     liveUrl: "https://www.luxuryjewels.ky/",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-designer-working-on-a-project-41329-large.mp4",
     architectureDiagramType: "vite-agency"
   }
 ];

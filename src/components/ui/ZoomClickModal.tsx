@@ -67,7 +67,7 @@ export function ZoomClickModal({ isOpen, onClose, data }: ZoomClickModalProps) {
               transformStyle: 'preserve-3d',
               perspective: '1400px',
             }}
-            className="relative z-10 w-full max-w-4xl max-h-[90vh] bg-[#09090b] text-white rounded-[28px] sm:rounded-[36px] border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col"
+            className="relative z-10 w-full max-w-4xl max-h-[90vh] bg-ink text-bg rounded-2xl border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.7)] overflow-hidden flex flex-col"
           >
             
             {/* Top Modal HUD Header */}
@@ -210,14 +210,11 @@ export function ZoomClickModal({ isOpen, onClose, data }: ZoomClickModalProps) {
             </div>
 
             {/* Bottom Footer Bar */}
-            <div className="px-6 py-4 border-t border-white/10 bg-black/60 flex items-center justify-between text-xs font-mono text-neutral-400">
-              <span>CLICK BACKDROP TO ZOOM OUT</span>
-              <button
-                onClick={onClose}
-                className="text-orange hover:underline font-bold uppercase flex items-center gap-1 cursor-pointer"
-              >
+            <div className="px-6 py-3 border-t border-white/10 bg-white/[0.03] flex items-center justify-between text-2xs mono text-bg/40">
+              <span>Click backdrop to close</span>
+              <button onClick={onClose} className="text-accent hover:text-accent-2 font-medium flex items-center gap-1 cursor-pointer">
                 <ZoomOut className="w-3.5 h-3.5" />
-                <span>Zoom Out</span>
+                <span>Close</span>
               </button>
             </div>
 

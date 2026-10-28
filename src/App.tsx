@@ -1,156 +1,76 @@
-import React, { useEffect, useState } from 'react';
+import { motion, useScroll } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { CredibilityPanel } from './components/CredibilityPanel';
-import { PhilosophySection } from './components/PhilosophySection';
 import { FeaturedWorkSection } from './components/FeaturedWorkSection';
-import { SystemDesignSection } from './components/SystemDesignSection';
+import { ClientTestimonialSection } from './components/ClientTestimonialSection';
 import { ServicesSection } from './components/ServicesSection';
-import { TechnicalEcosystem } from './components/TechnicalEcosystem';
 import { ExperienceSection } from './components/ExperienceSection';
-import { AboutSection } from './components/AboutSection';
+import { AgencyPartnershipSection } from './components/AgencyPartnershipSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { LusionBackgroundCanvas } from './components/3d/LusionBackgroundCanvas';
-import { LusionCursor } from './components/ui/LusionCursor';
-import { LusionLabsController, ShaderMode } from './components/ui/LusionLabsController';
-import { SmoothSectionTransition } from './components/ui/SmoothSectionTransition';
+import { SectionReveal } from './components/ui/SectionReveal';
+import { METRICS_DATA } from './data/portfolioData';
+import { ArrowDownRight, Sparkles } from 'lucide-react';
+import { TextAnimate } from './components/ui/text-animate';
 
-export function App() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [shaderMode, setShaderMode] = useState<ShaderMode>('fluid');
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const triggerSectionWipe = () => {
-    setIsTransitioning(true);
-    setTimeout(() => setIsTransitioning(false), 900);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        const currentProgress = (window.scrollY / totalScroll) * 100;
-        setScrollProgress(currentProgress);
-      }
-
-      // Track active section for Lusion 3D Background palette and geometry morphing
-      const sections = [
-        { id: 'home', name: 'hero' },
-        { id: 'credibility', name: 'credibility' },
-        { id: 'philosophy', name: 'philosophy' },
-        { id: 'work', name: 'work' },
-        { id: 'architecture', name: 'system' },
-        { id: 'capabilities', name: 'services' },
-        { id: 'services', name: 'services' },
-        { id: 'experience', name: 'experience' },
-        { id: 'about', name: 'about' },
-        { id: 'contact', name: 'contact' },
-      ];
-
-      const scrollPos = window.scrollY + window.innerHeight * 0.4;
-      for (const section of sections) {
-        const el = document.getElementById(section.id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section.name);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-          document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  return (
-    <div className="relative min-h-screen bg-cream text-ink font-sans selection:bg-orange selection:text-white overflow-x-hidden">
-      {/* Interactive Global WebGL 3D Background Canvas */}
-      <LusionBackgroundCanvas
-        activeSection={activeSection}
-        shaderMode={shaderMode}
-        isTransitioning={isTransitioning}
-      />
-
-      {/* Lusion Magnetic Custom Pointer & Particle Trail */}
-      <LusionCursor />
-
-      {/* Lusion Labs 3D Shader Mode Switcher Widget */}
-      <LusionLabsController
-        currentMode={shaderMode}
-        onModeChange={(mode) => {
-          setShaderMode(mode);
-          triggerSectionWipe();
-        }}
-        onTriggerWipe={triggerSectionWipe}
-      />
-
-      {/* Top Scroll Progress Indicator Bar */}
-      <div className="progress-bar" style={{ width: `${scrollProgress}%` }} />
-
-      {/* Sticky Mac-Style Navigation Header */}
-      <Navbar />
-
-      {/* Main Content Sections with Smooth Animated Transitions */}
-      <main className="relative z-10">
-        <SmoothSectionTransition id="home">
-          <HeroSection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="credibility" sectionNumber="01" sectionTitle="METRICS & IMPACT">
-          <CredibilityPanel />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="philosophy" sectionNumber="02" sectionTitle="ENGINEERING MANIFESTO">
-          <PhilosophySection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="work" sectionNumber="03" sectionTitle="FEATURED PROJECTS & SYSTEMS">
-          <FeaturedWorkSection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="architecture" sectionNumber="04" sectionTitle="3D ARCHITECTURE TOPOLOGY">
-          <SystemDesignSection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="capabilities" sectionNumber="05" sectionTitle="TECHNICAL ECOSYSTEM">
-          <TechnicalEcosystem />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="services" sectionNumber="06" sectionTitle="CAPABILITIES & SERVICES">
-          <ServicesSection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="experience" sectionNumber="07" sectionTitle="CAREER TRAJECTORY">
-          <ExperienceSection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="about" sectionNumber="08" sectionTitle="PRODUCT DEVELOPMENT MINDSET">
-          <AboutSection />
-        </SmoothSectionTransition>
-        <SmoothSectionTransition id="contact" sectionNumber="09" sectionTitle="INITIATE COLLABORATION">
-          <ContactSection />
-        </SmoothSectionTransition>
-      </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
+function CraftStrip() {
+  const message = 'Design-led interfaces · Built for real users · Engineered to perform ·';
+  return <p className="craft-strip" aria-label={message} role="img">
+    <span className="craft-strip-track" aria-hidden="true">
+      {[0, 1].map((copy) => <span className="craft-strip-group" key={copy}>
+        <span>Design-led interfaces</span><Sparkles /><span>Built for real users</span><Sparkles /><span>Engineered to perform</span><Sparkles />
+      </span>)}
+    </span>
+  </p>;
 }
 
+function ImpactSection() {
+  return <section className="impact section-pad" aria-labelledby="impact-heading">
+    <div className="container-wide">
+      <div className="section-heading-row">
+        <div><p className="eyebrow">Measured in the work</p><h2 id="impact-heading" className="section-title"><TextAnimate animation="springCharacter" by="character">Good craft.</TextAnimate>{' '}<em><TextAnimate animation="springCharacter" by="character">Real impact.</TextAnimate></em></h2></div>
+        <p className="section-intro">A few outcomes from client work and production systems. Each result is tied to a specific project below.</p>
+      </div>
+      <div className="impact-grid">{METRICS_DATA.map((item, index) => <article className="impact-item" key={item.id}>
+        <span className="impact-index">0{index + 1}</span><p className="impact-value">{item.value}</p><h3>{item.label}</h3><p className="impact-description">{item.description}</p>
+      </article>)}</div>
+      <div className="stack-strip"><span>Working across</span><p>React · TypeScript · Node.js · REST APIs · Redis · WordPress · Core Web Vitals</p></div>
+    </div>
+  </section>;
+}
+
+function ProcessSection() {
+  const steps = [
+    ['01', 'Understand', 'Align on the audience, constraints, existing systems, and what a successful launch needs to do.'],
+    ['02', 'Shape the solution', 'Map the interface and technical approach around the real requirements, then agree on scope and milestones.'],
+    ['03', 'Build in the open', 'Ship in clear, reviewable steps with responsive implementation, thoughtful performance, and regular updates.'],
+    ['04', 'Launch & hand over', 'Check the finished work, deploy with care, and leave behind a maintainable codebase and useful documentation.'],
+  ];
+  return <section id="process" className="process section-pad" aria-labelledby="process-heading"><div className="container-wide">
+    <div className="section-heading-row"><div><p className="eyebrow">A considered process</p><h2 id="process-heading" className="section-title"><TextAnimate animation="springCharacter" by="character">From first brief</TextAnimate><br /><TextAnimate animation="springCharacter" by="character">to</TextAnimate>{' '}<em><TextAnimate animation="springCharacter" by="character">live product.</TextAnimate></em></h2></div><p className="section-intro">Straightforward collaboration, with the details handled from the first conversation through production.</p></div>
+    <ol className="process-list">{steps.map(([num, title, body]) => <li key={num}><span className="process-number">{num}</span><h3><TextAnimate animation="springCharacter" by="character" staggerDelay={0.02}>{title}</TextAnimate></h3><p>{body}</p><ArrowDownRight aria-hidden="true" /></li>)}</ol>
+  </div></section>;
+}
+
+export function App() {
+  const { scrollYProgress } = useScroll();
+  return <div className="site-shell">
+    <motion.div className="progress-bar" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
+    <a className="skip-link" href="#main">Skip to content</a>
+    <Navbar />
+    <main id="main">
+      <SectionReveal><HeroSection /></SectionReveal>
+      <SectionReveal><CraftStrip /></SectionReveal>
+      <SectionReveal><ImpactSection /></SectionReveal>
+      <SectionReveal><FeaturedWorkSection /></SectionReveal>
+      <SectionReveal><ClientTestimonialSection /></SectionReveal>
+      <SectionReveal><ServicesSection /></SectionReveal>
+      <SectionReveal><ProcessSection /></SectionReveal>
+      <SectionReveal><ExperienceSection /></SectionReveal>
+      <SectionReveal><AgencyPartnershipSection /></SectionReveal>
+      <SectionReveal><ContactSection /></SectionReveal>
+    </main>
+    <Footer />
+  </div>;
+}
 export default App;
-
-

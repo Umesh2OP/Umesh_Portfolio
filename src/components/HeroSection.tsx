@@ -1,163 +1,189 @@
-import React from 'react';
-import { HeroSystemDashboard } from './HeroSystemDashboard';
-import { motion } from 'framer-motion';
-import { LusionTextSkew } from './ui/LusionTextSkew';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { PERSONAL_INFO } from '../data/portfolioData';
+import { TextAnimate } from './ui/text-animate';
+import { useIsCompactViewport } from '../hooks/useIsCompactViewport';
 
-export const HeroSection: React.FC = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.15,
-      },
-    },
-  };
+const heroCopyVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
+  },
+} satisfies Variants;
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 90,
-        damping: 14,
-      },
-    },
-  };
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+} satisfies Variants;
 
-  return (
-    <section id="home" className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-cream select-none border-b border-line-strong">
-      {/* Background blobs for organic, retro-premium look */}
-      <div className="absolute top-[-10%] right-[-10%] w-[420px] h-[420px] bg-orange-soft/30 blur-[90px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[320px] h-[320px] bg-purple-soft/20 blur-[90px] pointer-events-none rounded-full" />
+export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const artRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const isCompact = useIsCompactViewport();
+  const [typedText, setTypedText] = useState('');
+  const phrases = ['digital experiences', 'high-performance platforms', 'interfaces that feel effortless'];
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const sculptureY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion || isCompact ? 0 : 90]);
+  const sculptureRotate = useTransform(scrollYProgress, [0, 1], [-9, reduceMotion || isCompact ? -9 : 12]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion || isCompact ? 0 : -24]);
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Hero Content Column */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 space-y-6 flex flex-col justify-center"
-          >
-            
-            {/* Eyebrow & Status Badge */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3">
-              <span className="text-[10px] tracking-[0.15em] font-extrabold uppercase text-purple">
-                SOFTWARE ENGINEER · FULL-STACK DEVELOPER
-              </span>
-              <span className="text-[8px] tracking-[0.1em] font-extrabold uppercase px-2.5 py-0.5 rounded bg-green-soft/50 text-green border border-green-soft/75 inline-flex items-center gap-1.5 shrink-0 select-none">
-                <span className="w-1 h-1 rounded-full bg-green animate-pulse"></span>
-                <span>AVAILABLE FOR PROJECTS</span>
-              </span>
-            </motion.div>
+  useEffect(() => {
+    const art = artRef.current;
+    const sculpture = art?.querySelector<HTMLElement>('.sculpture-wrap');
+    if (!art || !sculpture || reduceMotion || isCompact || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-            {/* Main Headline with Lusion Kinetic Skew */}
-            <motion.div variants={itemVariants}>
-              <LusionTextSkew
-                as="h1"
-                text="I build software that works beyond the interface."
-                accentWords={['beyond', 'interface.']}
-                className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink tracking-tight leading-[1.05] font-sans"
-              />
-            </motion.div>
+    const context = gsap.context(() => {
+      gsap.fromTo(
+        sculpture,
+        { opacity: 0, '--pointer-y': '18px' },
+        {
+          opacity: 1,
+          '--pointer-y': '0px',
+          clearProps: 'opacity',
+          duration: 1.15,
+          ease: 'power3.out',
+        },
+      );
+    }, art);
 
-            {/* Category Chips / Metadata */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-2 pt-0.5">
-              <span className="px-3 py-1 text-[9px] font-extrabold tracking-wider uppercase rounded-full bg-cream-dim/35 text-ink-soft border border-line-strong">
-                PRODUCT ENGINEERING
-              </span>
-              <span className="px-3 py-1 text-[9px] font-extrabold tracking-wider uppercase rounded-full bg-cream-dim/35 text-ink-soft border border-line-strong">
-                FULL-STACK SYSTEMS
-              </span>
-              <span className="px-3 py-1 text-[9px] font-extrabold tracking-wider uppercase rounded-full bg-cream-dim/35 text-ink-soft border border-line-strong">
-                BUSINESS AUTOMATION
-              </span>
-            </motion.div>
+    const moveX = gsap.quickTo(sculpture, '--pointer-x', { duration: 0.8, ease: 'power3.out' });
+    const moveY = gsap.quickTo(sculpture, '--pointer-y', { duration: 0.8, ease: 'power3.out' });
+    const rotateY = gsap.quickTo(sculpture, '--pointer-rotate', { duration: 0.8, ease: 'power3.out' });
+    const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') return;
 
-            {/* Supporting Copy */}
-            <motion.p variants={itemVariants} className="text-base text-ink-soft leading-relaxed max-w-xl font-sans select-text font-medium">
-              I build production-ready web applications, APIs, and business systems — from customer-facing products to internal platforms and automation. Designed with modular architecture, reliable integrations, search engine optimization (SEO), and blazing-fast performance in mind.
-            </motion.p>
+      const bounds = art.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+      const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+      moveX(x * 22);
+      moveY(y * 16);
+      rotateY(x * 7);
+    };
+    const resetPointer = () => {
+      moveX(0);
+      moveY(0);
+      rotateY(0);
+    };
 
-            {/* Action Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
-              <motion.a
-                href="#work"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-extrabold uppercase tracking-wider text-white bg-orange hover:bg-orange/95 rounded-full transition-transform shadow-md shadow-orange/20 group"
-              >
-                <span>View Selected Work</span>
-                <span className="text-[14px] font-light transform group-hover:translate-x-0.5 transition-transform">→</span>
-              </motion.a>
+    art.addEventListener('pointermove', handlePointerMove);
+    art.addEventListener('pointerleave', resetPointer);
 
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-extrabold uppercase tracking-wider text-ink bg-white border border-line-strong hover:bg-cream-dim/30 rounded-full transition-transform"
-              >
-                <span>Start a Project</span>
-                <span className="text-orange text-xs">✦</span>
-              </motion.a>
-            </motion.div>
+    return () => {
+      art.removeEventListener('pointermove', handlePointerMove);
+      art.removeEventListener('pointerleave', resetPointer);
+      gsap.killTweensOf(sculpture, '--pointer-x');
+      gsap.killTweensOf(sculpture, '--pointer-y');
+      gsap.killTweensOf(sculpture, '--pointer-rotate');
+      context.revert();
+    };
+  }, [isCompact, reduceMotion]);
 
-            {/* Mobile-only System Visualization placement */}
-            <motion.div
-              variants={itemVariants}
-              className="block lg:hidden w-full my-4"
-            >
-              <HeroSystemDashboard isMobile={true} />
-            </motion.div>
+  useEffect(() => {
+    if (reduceMotion || isCompact) return;
 
-            {/* Core Stack Metadata Row */}
-            <motion.div
-              variants={itemVariants}
-              className="pt-5 border-t border-line/75 flex flex-col sm:flex-row sm:items-center gap-2 select-text font-sans"
-            >
-              <span className="text-[9px] font-extrabold text-ink-soft/75 uppercase tracking-widest block sm:w-24 shrink-0">
-                CORE STACK
-              </span>
-              <span className="text-xs font-bold font-mono text-ink-soft leading-snug sm:leading-none">
-                React · Next.js · Node.js · PostgreSQL · Redis
-              </span>
-            </motion.div>
+    let phraseIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+    let timer: number;
 
-            {/* Availability Status Bar */}
-            <motion.div
-              variants={itemVariants}
-              className="pt-4 border-t border-line/40 flex flex-wrap items-center gap-2 sm:gap-2.5 text-[8px] sm:text-[9px] text-ink-soft font-mono select-text"
-            >
-              <div className="flex items-center gap-1.5 shrink-0">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green"></span>
-                </span>
-                <span className="font-bold text-green uppercase tracking-wider">OPEN FOR PROJECTS</span>
-              </div>
-              <span className="text-ink-soft/30 hidden sm:inline">|</span>
-              <span className="uppercase tracking-wider font-bold text-[8px] sm:text-[9px]">IST (UTC+5:30) · GLOBAL CLIENTS · ~24H RESPONSE</span>
-            </motion.div>
+    const type = () => {
+      const phrase = phrases[phraseIndex];
+      characterIndex += deleting ? -1 : 1;
+      setTypedText(phrase.slice(0, characterIndex));
 
-          </motion.div>
+      if (!deleting && characterIndex === phrase.length) {
+        deleting = true;
+        timer = window.setTimeout(type, 1500);
+        return;
+      }
 
-          {/* Right Column — Desktop-only 3D System Visualization */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 100, damping: 15, delay: 0.55 }}
-            className="hidden lg:block lg:col-span-5"
-          >
-            <HeroSystemDashboard isMobile={false} />
-          </motion.div>
+      if (deleting && characterIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        timer = window.setTimeout(type, 350);
+        return;
+      }
 
-        </div>
+      timer = window.setTimeout(type, deleting ? 34 : 62);
+    };
+
+    timer = window.setTimeout(type, 450);
+    return () => window.clearTimeout(timer);
+  }, [isCompact, reduceMotion]);
+
+  return <section id="home" ref={sectionRef} className="hero">
+    <div className="hero-grain" aria-hidden="true" />
+    <div className="container-wide hero-inner">
+      <motion.div
+        className="hero-copy"
+        variants={heroCopyVariants}
+        initial={reduceMotion ? false : 'hidden'}
+        animate="visible"
+        style={reduceMotion || isCompact ? undefined : { y: contentY }}
+      >
+        <motion.p className="eyebrow hero-kicker" variants={heroItemVariants}>Independent developer · Digital craft &amp; engineering</motion.p>
+        <h1>
+          <span className="hero-heading-line"><TextAnimate animation="springCharacter" by="character" delay={0.12} staggerDelay={0.04}>Interfaces with</TextAnimate></span>
+          <br />
+          <span className="hero-heading-line"><TextAnimate animation="springCharacter" by="character" delay={0.3} staggerDelay={0.04}>purpose. Systems</TextAnimate></span>
+          <br />
+          <em className="hero-heading-line"><TextAnimate animation="springCharacter" by="character" delay={0.48} staggerDelay={0.04}>built to last.</TextAnimate></em>
+        </h1>
+        <motion.p className="hero-typewriter" variants={heroItemVariants}><span className="typewriter-prefix">I craft </span><span className="typewriter-phrase" aria-hidden="true">{reduceMotion ? phrases[0] : typedText}</span><span className="typewriter-caret" aria-hidden="true" /><span className="sr-only">I craft digital experiences.</span></motion.p>
+        <motion.p className="hero-description" variants={heroItemVariants}>I’m Umesh, a frontend-focused full-stack developer. I turn ambitious ideas into considered digital experiences, then engineer the systems that bring them to life.</motion.p>
+        <motion.div className="hero-actions" variants={heroItemVariants}><a className="button button-dark" href="#work">Explore selected work <ArrowUpRight size={16} aria-hidden="true" /></a><a className="text-link" href={`mailto:${PERSONAL_INFO.email}`}>Start a conversation <ArrowUpRight size={15} aria-hidden="true" /></a></motion.div>
+        <motion.div className="hero-caption" variants={heroItemVariants}><span>React · TypeScript · Node.js</span><span>Based in India · Working worldwide</span></motion.div>
+      </motion.div>
+      <div ref={artRef} className="hero-art" aria-hidden="true">
+        <motion.div className="sculpture-wrap developer-art" style={reduceMotion || isCompact ? undefined : { y: sculptureY, rotate: sculptureRotate }}>
+          <div className="developer-orbit developer-orbit-one" />
+          <div className="developer-orbit developer-orbit-two" />
+          <div className="developer-status">
+            <span className="developer-status-dot" />
+            <span>Independent · Available for select projects</span>
+          </div>
+          <div className="developer-editor">
+            <div className="developer-editor-topbar">
+              <span className="developer-window-dots"><i /><i /><i /></span>
+              <span className="developer-editor-brand">&lt;/&gt;</span>
+              <span className="developer-editor-title">umesh.dev</span>
+              <span className="developer-editor-branch">main</span>
+            </div>
+            <div className="developer-editor-file">
+              <span>src</span><span className="developer-file-separator">/</span><strong>portfolio.tsx</strong>
+              <span className="developer-file-type">TypeScript · React</span>
+            </div>
+            <div className="developer-code">
+              <div><span className="developer-line-number">01</span><span><b className="developer-token-keyword">const</b> <b className="developer-token-name">developer</b> = {'{'}</span></div>
+              <div><span className="developer-line-number">02</span><span><b className="developer-token-property">focus</b>: <em>"thoughtful software"</em>,</span></div>
+              <div><span className="developer-line-number">03</span><span><b className="developer-token-property">stack</b>: [<em>"React"</em>, <em>"TypeScript"</em>],</span></div>
+              <div><span className="developer-line-number">04</span><span><b className="developer-token-property">systems</b>: <em>"built to last"</em>,</span></div>
+              <div><span className="developer-line-number">05</span><span><b className="developer-token-property">ship</b>: <b className="developer-token-keyword">async</b> (idea) <b className="developer-token-keyword">=&gt;</b> product,</span></div>
+              <div><span className="developer-line-number">06</span><span>{'}'}</span></div>
+            </div>
+            <div className="developer-editor-footer">
+              <span><i /> All systems operational</span>
+              <span>Production ready</span>
+            </div>
+          </div>
+          <div className="developer-architecture-card">
+            <span className="developer-card-index">01 / ARCHITECTURE</span>
+            <div className="developer-system-flow">
+              <span>UI</span><i /><span>API</span><i /><span>DATA</span>
+            </div>
+            <span className="developer-card-caption">Designed as one system.</span>
+          </div>
+        </motion.div>
       </div>
-    </section>
-  );
-};
+    </div>
+    <a className="scroll-cue" href="#impact"><span>Scroll to explore</span><ArrowDown size={14} aria-hidden="true" /></a>
+  </section>;
+}
+export default HeroSection;

@@ -190,6 +190,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                     </div>
                   </div>
                 )}
+
+                {project.architectureDiagramType === 'workflow-automation' && (
+                  <div className="space-y-2 text-[11px]">
+                    <div className="text-ink-soft mb-2">// Privacy-safe content distribution workflow</div>
+                    <div className="p-2.5 bg-ink border border-line-strong rounded">
+                      1. Reviewed daily run ➔ Validate expected image before sending
+                    </div>
+                    <div className="p-2.5 bg-ink border border-line-strong rounded text-orange">
+                      2. Spreadsheet learning-level rule ➔ Exact group match ➔ Verify opened chat
+                    </div>
+                    <div className="p-2.5 bg-ink border border-line-strong rounded text-green-soft">
+                      3. Track completed deliveries ➔ Retry transient failures ➔ Report results
+                    </div>
+                    <div className="text-ink-soft mt-2">Demo content is synthetic; it does not represent the production environment.</div>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -226,7 +242,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
             {/* Micro Flow Visual */}
             <div className="space-y-3 my-6">
-              {project.architectureDiagramType === 'performance-opt' ? (
+              {project.architectureDiagramType === 'workflow-automation' ? (
+                <>
+                  <div className="p-3.5 rounded-xl bg-white border border-line-strong flex items-center justify-between text-xs font-semibold text-ink-soft">
+                    <span>Reviewed daily run</span>
+                    <span className="text-orange">Validate expected image</span>
+                  </div>
+                  <div className="flex justify-center">
+                    <span className="text-orange text-xs font-bold">↓ Spreadsheet Rule + Recipient Verification</span>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-white border border-line-strong flex items-center justify-between text-xs font-semibold text-ink-soft">
+                    <span>Learning-level group</span>
+                    <span className="text-purple">Exact name + opened chat</span>
+                  </div>
+                  <div className="flex justify-center">
+                    <span className="text-purple text-xs font-bold">↓ Track + Recover</span>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-white border border-line-strong flex items-center justify-between text-xs font-semibold text-ink-soft">
+                    <span>Delivery report</span>
+                    <span className="text-green">Success / failure</span>
+                  </div>
+                </>
+              ) : project.architectureDiagramType === 'performance-opt' ? (
                 <>
                   <div className="p-3.5 rounded-xl bg-white border border-line-strong flex items-center justify-between text-xs font-semibold text-ink-soft">
                     <span>Client UI Paint</span>
@@ -315,4 +352,3 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     </div>
   );
 };
-

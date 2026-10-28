@@ -20,7 +20,7 @@ export interface ProjectItem {
   githubUrl?: string;
   liveUrl?: string;
   videoUrl?: string;
-  architectureDiagramType: 'rate-limiter' | 'ai-pipeline' | 'vite-agency' | 'performance-opt';
+  architectureDiagramType: 'rate-limiter' | 'ai-pipeline' | 'vite-agency' | 'performance-opt' | 'workflow-automation';
 }
 
 export interface ExperienceItem {

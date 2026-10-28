@@ -2,67 +2,87 @@ import { MetricItem, ProjectItem, ExperienceItem, ServiceItem, ArchitectureNode 
 
 export const PERSONAL_INFO = {
   name: "Umesh",
-  title: "Software Engineer · Full Stack · Systems",
-  tagline: "I build software that works beyond the interface.",
-  bio: "Full Stack Developer with experience engineering production web applications, high-throughput APIs, and scalable web platforms using React, Next.js, Node.js, and Redis. Focused on clear system architecture, low latency overhead, Core Web Vitals optimization, and robust engineering.",
-  status: "Available for SDE Roles & Client Engineering",
+  title: "Independent Full-Stack Developer · Agency Technical Partner",
+  tagline: "I build high-converting web applications, custom platforms, and production systems for agencies and growing businesses.",
+  bio: "Independent Full-Stack Engineer specializing in high-performance web platforms, headless CMS, and API architecture for agencies, startups, and direct clients. Delivering pixel-perfect Figma builds, Core Web Vitals optimization, and robust backend systems with speed and reliability.",
+  status: "Available for Freelance Projects & Agency Partnerships",
   github: "https://github.com/Umesh2OP",
-  linkedin: "https://linkedin.com/in/umesh-maniyar", // Keep clean default or personal linkedin URL if available
+  linkedin: "https://linkedin.com/in/umesh-maniyar",
   email: "maniyarumesh9@gmail.com",
 };
 
 export const METRICS_DATA: MetricItem[] = [
   {
     id: "m1",
-    value: "< 5ms",
-    label: "Rate-Limiter Overhead",
-    description: "Redis sliding-window rate limiting execution overhead in QuotaGuard middleware.",
-    badge: "API System Performance",
+    value: "30.6s ➔ 1.1s",
+    label: "LCP Speed Boost (96% Faster)",
+    description: "Hostinger cold-start load optimization & 10,800ms TBT elimination for US Real Estate platform.",
+    badge: "Client ROI & Performance",
     iconName: "Zap"
   },
   {
     id: "m2",
-    value: "15–20%",
-    label: "Load-Time Reduction",
-    description: "MERN bundle size, image pipeline, and code-splitting optimization at TO-Let Globe.",
-    badge: "Core Web Vitals",
-    iconName: "TrendingUp"
+    value: "48 Hours",
+    label: "Agency Site Delivery",
+    description: "Turnaround time for production-ready, animation-rich GaVenue agency platform redesign.",
+    badge: "Velocity & Delivery",
+    iconName: "Clock"
   },
   {
     id: "m3",
-    value: "~25%",
-    label: "Bug Count Reduction",
-    description: "Reduction in recurring production frontend issues through type-safe modular refactoring.",
-    badge: "System Stability",
-    iconName: "ShieldCheck"
+    value: "Cayman Islands",
+    label: "Global Client Launch",
+    description: "Bespoke luxury jewelry showroom & e-commerce platform for international retail brand.",
+    badge: "E-Commerce & Retail",
+    iconName: "TrendingUp"
   },
   {
     id: "m4",
-    value: "~30%",
-    label: "Redundant Call Reduction",
-    description: "Eliminated duplicated API calls via normalized Redux state management & request memoization.",
-    badge: "State Optimization",
+    value: "< 5ms",
+    label: "Rate-Limiter Overhead",
+    description: "Redis sliding-window rate limiting execution overhead in QuotaGuard middleware.",
+    badge: "API System Performance",
     iconName: "Cpu"
   },
   {
     id: "m5",
-    value: "48 Hours",
-    label: "Agency Site Delivery",
-    description: "Turnaround time for production-ready, animation-rich GaVenue agency platform redesign.",
-    badge: "Velocity & Shipping",
-    iconName: "Clock"
+    value: "15–20%",
+    label: "Load-Time Reduction",
+    description: "MERN bundle size, image pipeline, and code-splitting optimization at TO-Let Globe.",
+    badge: "Core Web Vitals",
+    iconName: "ShieldCheck"
   }
 ];
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
+    id: "whatsapp-content-automation",
+    title: "WhatsApp Content Distribution Automation",
+    subtitle: "Reliable daily routing for nearly 100 learning groups",
+    category: "EdTech Workflow Automation",
+    problem: "Daily educational content had to be manually routed to nearly 100 WhatsApp groups across different learning levels. The process was repetitive and vulnerable to sending the wrong image, missing a group, or losing track of deliveries after an interruption.",
+    solution: "Built a Python and Playwright workflow that can be initiated with a single reviewed command. Spreadsheet-based rules route learning levels to the right groups; exact-name matching and chat verification check recipients; content validation stops runs when the expected image is missing or stale; transient failures are retried; and delivery tracking and run reports make partial completion visible. The public demo uses dummy content to protect organizational information and student privacy; it does not reproduce the production environment.",
+    technologies: ["Python", "Playwright", "WhatsApp Web", "Spreadsheet-Based Routing", "Delivery Reporting"],
+    engineeringHighlights: [
+      "Automated reviewed daily content distribution across nearly 100 WhatsApp learning groups.",
+      "Verified exact group names and the opened chat before attempting delivery.",
+      "Validated the expected daily image and stopped the run when content was missing or out of date.",
+      "Added transient-failure retries, completed-delivery tracking, and success/failure reporting to support recovery and reduce duplicate sends.",
+      "Prepared a privacy-safe demo with dummy content instead of organizational or student data."
+    ],
+    metricsResult: "Nearly 100 Groups · Single Reviewed Command",
+    githubUrl: "",
+    liveUrl: "",
+    architectureDiagramType: "workflow-automation"
+  },
+  {
     id: "realestate-opt",
     title: "US Real Estate Platform",
-    subtitle: "Production Speed & Warmup Architecture Optimization",
-    category: "Performance & Systems Engineering",
-    problem: "A WordPress real estate platform taking over 19 seconds to load on cold visits (Grade F / ~20% performance score) with 10,800ms of Total Blocking Time (TBT) due to background plugin installer loops, aggressive 30-minute cache purges, and 3,100+ database queries firing per cold page build, directly hurting lead conversions.",
-    solution: "Diagnosed and engineered optimization fixes: configured a 30-day persistence TTL cache, adjusted server execution limits for warmup, silenced background plugin installer loops, isolated database queries, deferred non-critical JavaScript, and optimized above-the-fold hero rendering without risking live data or causing downtime on Hostinger.",
-    technologies: ["WordPress", "Hostinger", "Cache Warmup", "Server-Side TTL", "Database Optimization", "Core Web Vitals", "JavaScript Deferred Loading", "PHP Server Tuning"],
+    subtitle: "96% Speed Boost & Cold-Load Optimization (30.6s ➔ 1.1s LCP)",
+    category: "Client Performance Case Study",
+    problem: "A WordPress real estate platform taking over 19 seconds to load on cold visits (Grade F performance score) with 10,800ms of Total Blocking Time (TBT) due to background plugin loops, aggressive cache purges, and 3,100+ database queries per page build — causing massive drop-offs in property lead conversions.",
+    solution: "Diagnosed and engineered optimization fixes: configured a 30-day persistence TTL cache, adjusted PHP execution limits for warmup, silenced background plugin loops, isolated database routines, deferred non-critical JS, and optimized above-the-fold hero rendering without downtime.",
+    technologies: ["WordPress", "Hostinger", "Cache Warmup", "Server-Side TTL", "Database Optimization", "Core Web Vitals", "JS Deferred Loading", "PHP Server Tuning"],
     engineeringHighlights: [
       "Adjusted Hostinger/PHP server execution limits to prevent timeouts during cache warmup operations",
       "Configured 30-day persistence TTL and disabled aggressive blanket asset purge triggers",
@@ -76,18 +96,76 @@ export const PROJECTS_DATA: ProjectItem[] = [
     architectureDiagramType: "performance-opt"
   },
   {
+    id: "luxuryjewels",
+    title: "Luxury Jewels (Cayman Islands)",
+    subtitle: "Bespoke Jewelry E-Commerce & Showroom Platform",
+    category: "International Client E-Commerce",
+    problem: "International luxury jewelry brand in the Cayman Islands required a high-performance digital presence that mirrors physical showroom exclusivity, loads instantly across global regions, and routes high-value client inquiries securely.",
+    solution: "Engineered a custom React showcase and e-commerce showroom for high-end clientele in the Cayman Islands with fluid visual galleries, direct client inquiry routing, headless CMS integration, and optimized global CDN asset delivery.",
+    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Headless CMS", "SEO Optimization", "Vercel Edge"],
+    engineeringHighlights: [
+      "Built for international retail client in the Cayman Islands (luxuryjewels.ky), optimized for global page loading speed",
+      "Designed dynamic jewelry collections viewer with fluid transitions and custom catalog grid sorting",
+      "Created direct customer inquiry routing channels for high-ticket custom product requests",
+      "Configured custom domain DNS records, OpenGraph cards, and target region SEO index tags"
+    ],
+    metricsResult: "Cayman Islands Live Production Launch",
+    githubUrl: "",
+    liveUrl: "https://www.luxuryjewels.ky/",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-designer-working-on-a-project-41329-large.mp4",
+    architectureDiagramType: "vite-agency"
+  },
+  {
+    id: "gavenue",
+    title: "GaVenue Agency Platform",
+    subtitle: "48-Hour Rapid Agency Production Turnaround",
+    category: "Agency Overflow & White-Label Delivery",
+    problem: "Agency required a modernized digital presence built and deployed within a strict 48-hour deadline without compromising Lighthouse performance scores or responsive fidelity.",
+    solution: "Built a sleek, component-driven web application using React, Vite, TypeScript, and Tailwind CSS with custom smooth scroll triggers and Vercel edge deployment.",
+    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Vercel Edge"],
+    engineeringHighlights: [
+      "Engineered full agency redesign from concept to live production deployment within 48 hours",
+      "Achieved top Core Web Vitals score through asset lazy-loading & zero cumulative layout shift",
+      "Created modular layout components ensuring clean code separation and future agency scalability"
+    ],
+    metricsResult: "Shipped to Production in 48 Hours",
+    githubUrl: "https://github.com/Umesh2OP/gavenue-redesign-",
+    liveUrl: "",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-person-working-on-a-laptop-in-a-modern-office-41331-large.mp4",
+    architectureDiagramType: "vite-agency"
+  },
+  {
+    id: "flavorcatalystz",
+    title: "Flavor Catalystz",
+    subtitle: "Headless WordPress, CRM Integration & SEO Engine",
+    category: "Production Brand Platform",
+    problem: "Growing brand needed a custom production web platform integrated with headless WordPress for content management and custom CRM APIs for lead acquisition.",
+    solution: "Built and deployed a production web platform from scratch using React, headless WordPress REST API infrastructure, custom CRM API endpoints, and Core Web Vitals SEO optimization.",
+    technologies: ["React", "Headless WordPress", "REST APIs", "CRM Integration", "Core Web Vitals", "SEO Optimization", "Hostinger", "Vercel"],
+    engineeringHighlights: [
+      "Engineered headless WordPress backend integration providing content team full CMS control without bloat",
+      "Connected custom CRM APIs for automated lead routing and real-time form processing",
+      "Structured technical SEO schema markup, metadata tags, and Core Web Vitals auditing",
+      "Managed production hosting pipelines on Hostinger and Vercel"
+    ],
+    metricsResult: "Production Launch & SEO Growth",
+    githubUrl: "",
+    liveUrl: "",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-41334-large.mp4",
+    architectureDiagramType: "ai-pipeline"
+  },
+  {
     id: "quotaguard",
     title: "QuotaGuard",
     subtitle: "API Rate Limiter & Security Dashboard",
-    category: "Infrastructure & Security",
-    problem: "APIs face abuse, DDoS vulnerability, and unmonitored quota consumption without rate control.",
+    category: "Infrastructure Security",
+    problem: "Production APIs face DDoS threats, bot abuse, and unmonitored rate consumption without robust control layers.",
     solution: "Engineered a low-latency API rate-limiting system with Redis sliding-window algorithm, JWT security layer, real-time request logging, and interactive React monitoring dashboard.",
     technologies: ["React", "TypeScript", "Node.js", "Express", "Redis", "MongoDB", "Tailwind CSS", "Axios"],
     engineeringHighlights: [
       "Designed sliding-window counter algorithm with Redis achieving <5ms overhead per request",
       "Implemented JWT authentication with Axios response interceptors for automatic token refresh",
-      "Constructed live metric analytics dashboard with real-time payload inspecting capabilities",
-      "Structured decoupled Node.js microservice architecture with graceful fallback during cache missed"
+      "Constructed live metric analytics dashboard with real-time payload inspecting capabilities"
     ],
     metricsResult: "< 5ms Rate-Limiter Overhead",
     githubUrl: "https://github.com/Umesh2OP/rate-limiter-api",
@@ -96,79 +174,22 @@ export const PROJECTS_DATA: ProjectItem[] = [
     architectureDiagramType: "rate-limiter"
   },
   {
-    id: "blogverse",
-    title: "BlogVerse",
-    subtitle: "AI-Powered High-Throughput Content Platform",
-    category: "AI & Distributed Systems",
-    problem: "Content generation platforms suffer from redundant LLM API calls, slow response times, and poor perceived performance.",
-    solution: "Architected a full-stack platform integrating LLaMA3 / Groq LLMs via FastAPI backend, with client-side Redux Toolkit state caching and Appwrite authentication.",
-    technologies: ["React", "FastAPI", "Appwrite", "Redux Toolkit", "Groq / LLaMA3", "Framer Motion", "Tailwind CSS"],
+    id: "toletglobe",
+    title: "TO-Let Globe Platform",
+    subtitle: "MERN Architecture Performance & Sub-Team Leadership",
+    category: "Engineering & Team Leadership",
+    problem: "Real estate platform experienced slow page load times and recurring frontend bugs across complex multi-step user flows.",
+    solution: "Executed production MERN stack performance overhaul, reducing load times by 15–20% and production bugs by ~25% while leading a 6-person frontend sub-team.",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "Redux Toolkit", "Tailwind CSS", "Git"],
     engineeringHighlights: [
-      "Integrated Groq / LLaMA3 inference endpoint for sub-second AI content generation",
-      "Reduced redundant API fetch requests by ~30% through Redux Toolkit slice memoization",
-      "Engineered optimistic UI updates with Framer Motion transitions for near-instant interaction response",
-      "Designed clean REST contract between Python FastAPI AI workers and React SPA client"
+      "Executed production MERN stack performance optimization, driving a 15–20% reduction in page load times",
+      "Led root-cause debugging initiatives, reducing recurring production frontend bugs by ~25%",
+      "Served as Frontend Sub-Team Lead, coordinating sprint deliverables and code reviews for 6 developers"
     ],
-    metricsResult: "~30% Reduction in Redundant API Requests",
-    githubUrl: "https://github.com/Umesh2OP/Ai-Blogsite",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-41334-large.mp4",
-    architectureDiagramType: "ai-pipeline"
-  },
-  {
-    id: "gavenue",
-    title: "GaVenue",
-    subtitle: "High-Performance Agency Digital Platform",
-    category: "Web Engineering & Design",
-    problem: "Agency required a modernized digital presence built and deployed within strict tight deadlines without compromising lighthouse speed.",
-    solution: "Built a sleek, component-driven web application using React, Vite, TypeScript, and Tailwind CSS with custom smooth scroll triggers and Vercel edge deployment.",
-    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Vercel"],
-    engineeringHighlights: [
-      "Engineered full site redesign from concept to production deployment within 48 hours",
-      "Achieved top Core Web Vitals score through asset lazy-loading & zero cumulative layout shift",
-      "Created modular layout components ensuring clean code separation and future scalability"
-    ],
-    metricsResult: "Shipped to Production in 48 Hours",
-    githubUrl: "https://github.com/Umesh2OP/gavenue-redesign-",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-person-working-on-a-laptop-in-a-modern-office-41331-large.mp4",
-    architectureDiagramType: "vite-agency"
-  },
-  {
-    id: "slotswapper",
-    title: "SlotSwapper",
-    subtitle: "Dynamic P2P Calendar Slot Exchange Engine",
-    category: "System Integration & Scheduling",
-    problem: "Traditional calendar calendars are rigid, preventing users from swapping time slots directly without double-booking or admin overhead.",
-    solution: "Engineered a peer-to-peer appointment slot trading platform with MongoDB concurrency locks, a Node.js negotiation handler, and a clean TypeScript React calendar interface.",
-    technologies: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Tailwind CSS", "JWT Auth"],
-    engineeringHighlights: [
-      "Designed scheduling negotiation backend state-machine preventing double-booking slots",
-      "Constructed custom calendar grid UI with responsive time-slot selection layouts",
-      "Structured clean backend API boundaries with RESTful request/response validations"
-    ],
-    metricsResult: "Zero Scheduling Overlaps",
-    githubUrl: "https://github.com/Umesh2OP/SlotSwapper-Backend.",
-    liveUrl: "https://github.com/Umesh2OP/SlotSwapper-Frontend",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-working-on-a-code-in-a-computer-41549-large.mp4",
-    architectureDiagramType: "vite-agency"
-  },
-  {
-    id: "luxuryjewels",
-    title: "Luxury Jewels",
-    subtitle: "Bespoke Jewelry E-Commerce & Showroom",
-    category: "E-Commerce & Digital Branding",
-    problem: "Bespoke luxury brands need a high-performance digital presence that mirrors physical showroom exclusivity, loads instantly, and handles international client inquiries securely.",
-    solution: "Engineered a custom React showcase and e-commerce showroom for high-end clientele in the Cayman Islands with fluid visual galleries, direct inquiry routing, and headless CMS capabilities.",
-    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Vercel"],
-    engineeringHighlights: [
-      "Built for international retail client in the Cayman Islands, optimized for global page loading speed",
-      "Designed dynamic jewelry collections viewer with fluid transitions and custom catalog grid sorting",
-      "Created direct customer inquiry routing channels for custom bespoke product requests",
-      "Configured custom domain DNS records and optimized SEO index tags for target region visibility"
-    ],
-    metricsResult: "Cayman Islands Client Launch",
+    metricsResult: "15-20% Faster Load Times & -25% Bugs",
     githubUrl: "",
-    liveUrl: "https://www.luxuryjewels.ky/",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-designer-working-on-a-project-41329-large.mp4",
+    liveUrl: "",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-working-on-a-code-in-a-computer-41549-large.mp4",
     architectureDiagramType: "vite-agency"
   }
 ];
@@ -221,40 +242,40 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "srv-1",
-    category: "Product Engineering",
-    title: "Custom Web Apps & SaaS Dashboards",
-    description: "End-to-end full-stack software development built for speed, performance, and search engine optimization (SEO). Tailored for startups using React, Next.js, and Node.js.",
+    category: "For Agencies & Startups",
+    title: "White-Label & Custom Web Development",
+    description: "Pixel-perfect Figma-to-Code builds, custom Next.js/React applications, and white-label development for digital agencies and fast-scaling startups.",
     capabilities: [
-      "Single Page Applications & Next.js Platforms",
-      "SEO-Optimized Architectures & Core Web Vitals Optimization",
-      "Real-time Telemetry & Data Dashboards",
-      "Type-safe Frontend & Component Design Systems"
+      "Figma to Next.js / React Pixel-Perfect Builds",
+      "White-Label Client Site Development & Git Handoffs",
+      "Responsive & Micro-Animated Interfaces",
+      "On-Time Delivery & Reliable Communication"
     ],
     iconName: "Layout"
   },
   {
     id: "srv-2",
-    category: "Business Systems",
-    title: "E-Commerce, Booking & Integration Platforms",
-    description: "Turn business processes into high-performance web platforms. Structured with SEO-friendly headless architectures, fast payment gateways, and automated sync.",
+    category: "For E-Commerce & Businesses",
+    title: "Headless CMS, E-Commerce & SEO Systems",
+    description: "High-converting web platforms built with Headless WordPress, Shopify, or custom APIs — structured for lightning speed and top Google search rankings.",
     capabilities: [
-      "Custom E-Commerce & Service Booking Engines",
-      "SEO-Friendly Static Site Generation & Headless CMS",
-      "CRM & Third-Party API Integrations",
-      "Automated Business Data Pipelines"
+      "Headless WordPress & Custom CMS Architectures",
+      "Luxury Showroom & E-Commerce Web Apps",
+      "Technical SEO Audit & Schema Markup",
+      "CRM & Third-Party API Integrations"
     ],
     iconName: "Server"
   },
   {
     id: "srv-3",
-    category: "Core Engineering",
-    title: "API Architecture & Performance Optimization",
-    description: "Deep technical engineering for existing applications suffering from latency, memory bloat, poor core web vitals, or unoptimized search visibility.",
+    category: "Performance & Engineering",
+    title: "Core Web Vitals Audit & Speed Overhauls",
+    description: "Rescuing slow websites and APIs. Fixing server bottlenecks, long LCP times, memory leaks, and inefficient database queries.",
     capabilities: [
-      "RESTful API Design & JWT Auth Middleware",
-      "Redis Caching & Token Bucket Rate-Limiting",
-      "Core Web Vitals Audit & 15-30% Speed Boost",
-      "Technical SEO Audits & Performance Tuning"
+      "90%+ Google Lighthouse & Core Web Vitals Fixes",
+      "Hostinger, Vercel & Node.js Server Tuning",
+      "Redis In-Memory Caching & Rate Limiting",
+      "Database Query & Cache Warmup Optimization"
     ],
     iconName: "Cpu"
   }
@@ -312,44 +333,43 @@ export const PHILOSOPHY_STAGES = [
   {
     step: "01",
     title: "Understand",
-    sub: "Business & System Constraints",
-    desc: "Every system starts with clarity on real business goals, user loads, performance SLAs, and data access patterns.",
-    codeSnippet: `// Step 1: Requirements & Constraints Matrix
-const Constraints = {
-  maxAcceptableLatency: '50ms',
-  targetAvailability: '99.9%',
-  primaryBottleneck: 'Uncached API Endpoints'
+    sub: "Business & Client Scope",
+    desc: "Every project begins with absolute clarity on client goals, deadline boundaries, brand vision, and performance targets.",
+    codeSnippet: `// Step 1: Requirements & Client SLA Matrix
+const ProjectScope = {
+  maxTargetLCP: '1.2s',
+  designFidelity: '100% Figma Pixel-Perfect',
+  deliveryBuffer: 'Zero-Delay Handoff'
 };`
   },
   {
     step: "02",
     title: "Architect",
-    sub: "API & Data Flow Design",
-    desc: "Designing clear API contracts, decoupled service boundaries, caching strategies, and state flow before writing lines of code.",
-    codeSnippet: `// Step 2: System Boundary Definition
-interface RateLimiterRule {
-  windowMs: 60 * 1000,
-  maxRequests: 100,
-  storageEngine: 'RedisCluster'
+    sub: "Design-System & API Contract",
+    desc: "Structuring clean component hierarchies, state flows, headless CMS connections, and API security before writing code.",
+    codeSnippet: `// Step 2: Architecture & Contract Definition
+interface AgencyDeliverable {
+  framework: 'Next.js / React',
+  styling: 'Tailwind CSS + CSS Modules',
+  cmsIntegration: 'Headless WP / REST'
 };`
   },
   {
     step: "03",
     title: "Engineer",
-    sub: "Full-Stack Implementation",
-    desc: "Building clean, type-safe React interfaces, robust Node.js backend logic, secure JWT authentication, and resilient DB operations.",
-    codeSnippet: `// Step 3: Low-Overhead Middleware
-async function rateLimitMiddleware(req, res, next) {
-  const currentCount = await redis.incr(req.ip);
-  if (currentCount > MAX_LIMIT) return res.status(429).json({ error: 'Quota Exceeded' });
-  next();
+    sub: "Full-Stack Development",
+    desc: "Building clean, maintainable React interfaces, robust Node.js backends, smooth micro-animations, and responsive layouts.",
+    codeSnippet: `// Step 3: Production Build & Component Engineering
+async function renderClientApp(props) {
+  const data = await fetchHeadlessData();
+  return <ClientShowroom data={data} />;
 }`
   },
   {
     step: "04",
-    title: "Optimize",
-    sub: "Performance & Reliability",
-    desc: "Profiling bundle sizes, measuring Core Web Vitals, eliminating redundant network calls, and performing root-cause bug isolation.",
+    title: "Deliver & Optimize",
+    sub: "Core Web Vitals & Launch",
+    desc: "Audit Core Web Vitals, optimize image pipelines, verify SEO schema markup, and hand off production code smoothly.",
     codeSnippet: `// Step 4: Core Web Vitals Verification
 const performanceMetrics = {
   LCP: '1.1s', // Largest Contentful Paint

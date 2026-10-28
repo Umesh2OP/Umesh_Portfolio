@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="1050" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#23261F"/>
+      <stop offset="1" stop-color="#111411"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="255" y1="280" x2="930" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C9AD78"/>
+      <stop offset="1" stop-color="#8FA18A"/>
+    </linearGradient>
+    <filter id="glow" x="290" y="215" width="650" height="420" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="32"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <path d="M0 560C238 470 324 756 580 651c197-81 278-294 620-216v365H0V560Z" fill="#22271F" opacity=".58"/>
+  <circle cx="614" cy="413" r="205" fill="#9BA889" opacity=".2" filter="url(#glow)"/>
+  <g stroke="#C9AD78" stroke-opacity=".3">
+    <path d="M340 315h178M682 315h178M340 487h178M682 487h178"/>
+    <path d="M518 315c36 0 39 39 39 78s-3 94 32 94M682 315c-36 0-39 39-39 78s3 94-32 94"/>
+  </g>
+  <g fill="#D6C7A8">
+    <circle cx="340" cy="315" r="5"/><circle cx="860" cy="315" r="5"/>
+    <circle cx="340" cy="487" r="5"/><circle cx="860" cy="487" r="5"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="74" y="82" fill="#C9AD78" font-size="16" letter-spacing="4">EDTECH · WORKFLOW AUTOMATION</text>
+    <text x="74" y="144" fill="#F4F1E9" font-size="36" font-weight="600">Content, routed with care.</text>
+    <text x="74" y="180" fill="#A5A79E" font-size="17">A privacy-safe workflow illustration · Dummy content only</text>
+    <g>
+      <rect x="110" y="258" width="230" height="286" rx="18" fill="#F4F3F0"/>
+      <rect x="110" y="258" width="230" height="46" rx="18" fill="#E8E7E1"/>
+      <path d="M110 286h230v18H110z" fill="#E8E7E1"/>
+      <circle cx="136" cy="281" r="5" fill="#B78674"/>
+      <circle cx="154" cy="281" r="5" fill="#C6A86D"/>
+      <circle cx="172" cy="281" r="5" fill="#839276"/>
+      <text x="133" y="343" fill="#73746D" font-size="13" letter-spacing="1.5">DAILY CONTENT</text>
+      <rect x="133" y="363" width="184" height="98" rx="10" fill="#DADDD2"/>
+      <path d="m148 438 43-42 31 30 24-19 55 54H148v-23Z" fill="#9BA889"/>
+      <circle cx="273" cy="389" r="11" fill="#C9AD78"/>
+      <text x="133" y="493" fill="#292B26" font-size="15" font-weight="600">Learning image</text>
+      <text x="133" y="517" fill="#767770" font-size="12">Validated before routing</text>
+    </g>
+    <g>
+      <rect x="518" y="260" width="164" height="118" rx="16" fill="#272B25" stroke="#C9AD78" stroke-opacity=".62"/>
+      <text x="600" y="298" fill="#C9AD78" font-size="12" text-anchor="middle" letter-spacing="1.5">PYTHON +</text>
+      <text x="600" y="325" fill="#F4F1E9" font-size="20" font-weight="600" text-anchor="middle">Playwright</text>
+      <text x="600" y="352" fill="#A5A79E" font-size="12" text-anchor="middle">Reviewed run</text>
+    </g>
+    <g>
+      <rect x="518" y="430" width="164" height="118" rx="16" fill="#272B25" stroke="#8FA18A" stroke-opacity=".72"/>
+      <text x="600" y="468" fill="#A9B79D" font-size="12" text-anchor="middle" letter-spacing="1.5">ROUTING RULES</text>
+      <text x="600" y="496" fill="#F4F1E9" font-size="17" font-weight="600" text-anchor="middle">Learning level</text>
+      <text x="600" y="521" fill="#A5A79E" font-size="12" text-anchor="middle">Spreadsheet mapped</text>
+    </g>
+    <g>
+      <rect x="860" y="254" width="246" height="300" rx="18" fill="#20241F" stroke="#FFFFFF" stroke-opacity=".13"/>
+      <text x="888" y="293" fill="#F4F1E9" font-size="15" font-weight="600">Delivery checks</text>
+      <circle cx="893" cy="332" r="5" fill="#9EAF8F"/>
+      <text x="909" y="337" fill="#D9DAD3" font-size="13">Exact group match</text>
+      <circle cx="893" cy="371" r="5" fill="#9EAF8F"/>
+      <text x="909" y="376" fill="#D9DAD3" font-size="13">Opened chat verified</text>
+      <circle cx="893" cy="410" r="5" fill="#9EAF8F"/>
+      <text x="909" y="415" fill="#D9DAD3" font-size="13">Content checked</text>
+      <circle cx="893" cy="449" r="5" fill="#9EAF8F"/>
+      <text x="909" y="454" fill="#D9DAD3" font-size="13">Delivery tracked</text>
+      <path d="M888 480h190" stroke="#FFFFFF" stroke-opacity=".12"/>
+      <text x="888" y="512" fill="#C9AD78" font-size="12" letter-spacing="1">SUCCESS + FAILURE REPORT</text>
+    </g>
+    <rect x="74" y="679" width="1052" height="1" fill="#FFFFFF" opacity=".12"/>
+    <text x="74" y="720" fill="#A5A79E" font-size="13" letter-spacing="1.1">NEARLY 100 GROUPS</text>
+    <circle cx="264" cy="716" r="3" fill="#C9AD78"/>
+    <text x="284" y="720" fill="#A5A79E" font-size="13" letter-spacing="1.1">RECIPIENT VERIFICATION</text>
+    <circle cx="523" cy="716" r="3" fill="#C9AD78"/>
+    <text x="543" y="720" fill="#A5A79E" font-size="13" letter-spacing="1.1">FAILURE-AWARE DELIVERY</text>
+    <text x="1124" y="760" fill="#777B70" font-size="11" text-anchor="end">ILLUSTRATIVE · NO REAL GROUP OR STUDENT DATA</text>
+  </g>
+</svg>

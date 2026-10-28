@@ -1,76 +1,74 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        cream: '#F5EEDD',
-        'cream-dim': '#EBDFC2',
-        ink: '#1F1A12',
-        'ink-soft': '#6E5F49',
-        orange: '#9C7A2E',
-        'orange-soft': '#EAD9AA',
-        purple: '#5C2A2E',
-        'purple-soft': '#E8D2D2',
-        green: '#3F5C3F',
-        'green-soft': '#DDE5DA',
-        line: 'rgba(31, 26, 18, 0.11)',
-        'line-strong': 'rgba(31, 26, 18, 0.20)',
-        cyber: {
-          bg: '#06080D',
-          card: '#0C101B',
-          cardHover: '#121726',
-          panel: '#0F1422',
-          border: 'rgba(255, 255, 255, 0.08)',
-          borderGlow: 'rgba(0, 240, 255, 0.3)',
-          cyan: '#00F0FF',
-          cyanDim: 'rgba(0, 240, 255, 0.15)',
-          emerald: '#10B981',
-          emeraldDim: 'rgba(16, 185, 129, 0.15)',
-          purple: '#8B5CF6',
-          amber: '#F59E0B',
-          textMain: '#F8FAFC',
-          textMuted: '#94A3B8',
-          textSub: '#64748B',
-        }
+        // Primary palette
+        bg:      '#0f172a',
+        'bg-2':  '#1e293b',
+        'bg-3':  '#273349',
+        'bg-card': '#1e293b',
+        'bg-hover': '#253047',
+
+        // Text
+        'text-1': '#f8fafc',
+        'text-2': '#cbd5e1',
+        'text-3': '#94a3b8',
+        'text-4': '#64748b',
+
+        // Accents
+        accent:  '#38bdf8',
+        'accent-2': '#0ea5e9',
+        indigo:  '#818cf8',
+        green:   '#4ade80',
+
+        // Borders
+        border:  'rgba(255,255,255,0.08)',
+        'border-2': 'rgba(255,255,255,0.14)',
+
+        // Legacy aliases so existing code still compiles
+        cream:       '#0f172a',
+        'cream-dim': '#1e293b',
+        ink:         '#f8fafc',
+        'ink-2':     '#cbd5e1',
+        'ink-3':     '#94a3b8',
+        'ink-soft':  '#94a3b8',
+        'ink-4':     '#64748b',
+        orange:      '#38bdf8',
+        'orange-soft':'#0c3347',
+        purple:      '#818cf8',
+        'purple-soft':'#1e1e3a',
+        'line':      'rgba(255,255,255,0.08)',
+        'line-2':    'rgba(255,255,255,0.14)',
+        'line-strong':'rgba(255,255,255,0.14)',
+        'accent-3':  '#0c3347',
+        'accent-dim':'rgba(56,189,248,0.12)',
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        sans: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Menlo', 'Consolas', 'monospace'],
+      },
+      fontSize: {
+        '2xs': ['0.6875rem', { lineHeight: '1rem' }],
       },
       animation: {
-        'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
-        'float': 'float 6s infinite ease-in-out',
-        'scanline': 'scanline 8s linear infinite',
-        'data-stream': 'dataStream 2s linear infinite',
+        'marquee': 'marquee 45s linear infinite',
+        'fade-up': 'fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both',
       },
       keyframes: {
-        pulseGlow: {
-          '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.4))' },
-          '50%': { opacity: '0.9', filter: 'drop-shadow(0 0 16px rgba(0,240,255,0.8))' },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to:   { transform: 'translateX(-50%)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
+        fadeUp: {
+          from: { opacity: '0', transform: 'translateY(16px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
         },
-        scanline: {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(1000%)' },
-        },
-        dataStream: {
-          '0%': { strokeDashoffset: '100' },
-          '100%': { strokeDashoffset: '0' },
-        }
       },
-      backgroundImage: {
-        'cyber-grid': 'linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
-        'radial-glow': 'radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.08) 0%, rgba(6, 8, 13, 0) 70%)',
-        'emerald-glow': 'radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, rgba(6, 8, 13, 0) 70%)',
-      }
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
     },
   },
   plugins: [],
